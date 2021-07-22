@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".to_Register">
+
+    <!-- no camviar el layout principal, luego no jala -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/boton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="Guardar"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                />
+
+
+
+            <Button
+                android:id="@+id/boton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="BUSCAR POR NOMBRE"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                />
+
+            <Button
+                android:id="@+id/boton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="17dp"
+                android:text="EDITAR POR NOMBRE"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                />
+
+            <Button
+                android:id="@+id/boton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="9dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginBottom="5dp"
+                android:text="Eliminar POR NOMBRE"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                />
+
+            <Button
+                android:id="@+id/boton5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="9dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginBottom="5dp"
+                android:text="Tomar foto"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                />
+
+            <!--<ImageView
+                android:id="@+id/picture"
+                android:layout_width="120dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_launcher_foreground"
+                tools:ignore="VectorDrawableCompat" />-->
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Nombre"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="27dp"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Dosis"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Lapso"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                />
+
+            <EditText
+                android:id="@+id/editText4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginBottom="17dp"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Descripcion"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
