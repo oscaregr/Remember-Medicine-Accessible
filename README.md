@@ -5,9 +5,8 @@ An application, so as not to forget to take the medicine at the right time by cr
 Logros!!
 Guarda en base de datos
 Crea lista
+Rediseñado
 
 !!Pendientes!!
-Cargar imagen.
-Poner el spiner para la imagen a seleccionar
-
+Hacer funcionar el boton editar
 Crear las alarmas
