@@ -18,26 +18,6 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/boton1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="Guardar"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                />
-
-
-
-            <Button
-                android:id="@+id/boton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="BUSCAR POR NOMBRE"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                />
-
-            <Button
                 android:id="@+id/boton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,95 +28,163 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 />
 
-            <Button
-                android:id="@+id/boton4"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Nombre"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="28dp"/>
+
+                <EditText
+                    android:id="@+id/editText1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Nombre del medicamento"
+                    android:inputType="textPersonName"
+                    android:padding="15dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Dosis"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="28dp"/>
+
+                <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Cantidad a consumir"
+                    android:inputType="textPersonName"
+                    android:padding="15dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    />
+
+            </LinearLayout>
+
+
+
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="9dp"
-                android:layout_marginLeft="9dp"
-                android:layout_marginBottom="5dp"
-                android:text="Eliminar POR NOMBRE"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_height="match_parent"
+                android:text="Lapso de tiempo para consumo"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="28dp"
                 />
 
-            <Button
-                android:id="@+id/boton5"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/dias"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:maxLines="3"
+                    android:hint="Dias"
+                    android:padding="15dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    />
+
+                <EditText
+                    android:id="@+id/horas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:hint="Horas"
+                    android:inputType="number"
+                    android:maxLines="2"
+                    android:padding="15dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <EditText
+                    android:id="@+id/minutos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+                    android:maxLines="2"
+                    android:hint="Minutos"
+                    android:padding="15dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="9dp"
-                android:layout_marginLeft="9dp"
-                android:layout_marginBottom="5dp"
-                android:text="Tomar foto"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                />
+                android:layout_height="match_parent"
+                android:text="Tipo de medicamento"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="28dp"/>
 
-            <!--<ImageView
-                android:id="@+id/picture"
-                android:layout_width="120dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_launcher_foreground"
-                tools:ignore="VectorDrawableCompat" />-->
-
-            <EditText
-                android:id="@+id/editText1"
+            <Spinner
+                android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="Nombre"
-                android:inputType="textPersonName"
-                android:padding="15dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                />
+                android:background="#DFD1D1"
+                android:dropDownSelector="@color/material_on_primary_disabled"
+                android:spinnerMode="dropdown" />
 
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginTop="27dp"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="Dosis"
-                android:inputType="textPersonName"
-                android:padding="15dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                />
-
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="Lapso"
-                android:inputType="textPersonName"
-                android:padding="15dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                />
+                android:text="Descripción"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/black"
+                android:textSize="28dp"/>
 
             <EditText
                 android:id="@+id/editText4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="17dp"
                 android:ems="10"
                 android:gravity="center"
                 android:hint="Descripcion"
-                android:inputType="textPersonName"
+                android:inputType="textMultiLine"
                 android:padding="15dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 />
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
+            <Button
+                android:id="@+id/boton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:text="Guardar"
+                android:layout_gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                />
 
         </LinearLayout>
     </ScrollView>

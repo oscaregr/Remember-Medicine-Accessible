@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".showMedicine">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="233dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            >
+
+            <ImageButton
+                android:id="@+id/back"
+                android:contentDescription="Volver a Lista"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="?attr/actionModeCloseDrawable"
+                android:textSize="40dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="right">
+
+                <ImageButton
+                    android:id="@+id/edit"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@android:color/holo_orange_light"
+                    android:padding="0dp"
+                    android:layout_marginRight="18dp"
+                    android:contentDescription="Editar informacion"
+                    android:src="@android:drawable/ic_menu_edit" />
+
+                <ImageButton
+                    android:id="@+id/delete"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:contentDescription="Eliminar medicamento"
+                    android:background="@color/design_default_color_error"
+                    android:src="@android:drawable/ic_menu_delete"
+                    android:padding="0dp"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/tipo"
+                    android:layout_width="98dp"
+                    android:layout_height="80dp"
+                    android:src="@mipmap/ic_launcher"
+                    />
+
+                <TextView
+                    android:id="@+id/medicamento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Medicamento"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="28dp"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:background="?android:attr/listDivider"
+                android:importantForAccessibility="no"/>
+
+            <TextView
+                android:id="@+id/dosis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="dosis"
+                android:gravity="right"
+                android:textColor="@color/black"
+                android:textSize="28dp"/>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/lapso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cada"
+                android:gravity="left"
+                android:textColor="@color/black"
+                android:textSize="28dp"/>
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripcion:"
+                android:textSize="28dp"
+                />
+
+            <TextView
+                android:id="@+id/descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="descripcion"
+                android:textSize="25dp"
+                android:gravity="left"
+                android:textColor="@color/black"/>
+
+            <Button
+                android:id="@+id/does"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center"
+                android:padding="20dp"
+                android:text="Tomado"
+                />
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
