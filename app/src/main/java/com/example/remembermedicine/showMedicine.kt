@@ -23,11 +23,11 @@ class showMedicine : AppCompatActivity() {
 
             dosis.text = "Dosis ${fila.getString(2)}"
 
-            if (fila.getInt(3) != null && fila.getInt(4) != null && fila.getInt(5) != null)
+            if (fila.getInt(3) != 0 && fila.getInt(4) != 0 && fila.getInt(5) != 0)
                 lapso.text = "Cada ${fila.getInt(3)} dias, ${fila.getInt(4)} horas, ${fila.getInt(5)} minutos."
-            else if (fila.getInt(4) != null && fila.getInt(5) != null)
+            else if (fila.getInt(4) != 0 && fila.getInt(5) != 0)
                 lapso.text = "Cada ${fila.getInt(4)} horas, ${fila.getInt(5)} minutos."
-            else if (fila.getInt(5) != null)
+            else if (fila.getInt(5) != 0)
                 lapso.text = "Cada ${fila.getInt(5)} minutos."
 
             descripcion.text = fila.getString(6)
@@ -55,7 +55,11 @@ class showMedicine : AppCompatActivity() {
         }
 
         edit.setOnClickListener {
-
+            finish()
+            val otherScreen = Intent(this, to_Register::class.java)
+            otherScreen.putExtra("edit", true)
+            otherScreen.putExtra("idRegister", idRegister)
+            startActivity(otherScreen)
         }
 
         delete.setOnClickListener {
