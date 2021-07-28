@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import android.widget.ArrayAdapter
-import kotlinx.android.synthetic.main.activity_show_medicine.*
+//import kotlinx.android.synthetic.main.activity_show_medicine.*
 import kotlinx.android.synthetic.main.activity_to__register.*
 import kotlinx.android.synthetic.main.custom_list.*
+import java.util.*
+
 
 class to_Register : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +69,8 @@ class to_Register : AppCompatActivity() {
                 registro.put("descripcion", editText4.getText().toString())
                 registro.put("tipo", spinner.selectedItem.toString())
 
+
+
                 val cant = bd.update("medicamentos", registro, "id= '${idRegister}'", null)
                 bd.close()
 
@@ -94,6 +98,14 @@ class to_Register : AppCompatActivity() {
                 val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
                 val bd = admin.writableDatabase
                 val registro = ContentValues()
+                val c = Calendar.getInstance()
+
+                // sumar la el tiepo a definido a la fecha actual para genrear la fecha de alarma
+                dias.text.toString().toIntOrNull()?.let { it1 -> c.add(Calendar.DAY_OF_YEAR, it1) }
+                horas.text.toString().toIntOrNull()?.let { it1 -> c.add(Calendar.HOUR_OF_DAY, it1) }
+                minutos.text.toString().toIntOrNull()?.let { it1 -> c.add(Calendar.MINUTE, it1) }
+
+
                 registro.put("nombre", editText1.getText().toString())
                 registro.put("dosis", editText2.getText().toString())
                 registro.put("dias", dias.text.toString().toIntOrNull())
@@ -101,6 +113,10 @@ class to_Register : AppCompatActivity() {
                 registro.put("minutos", minutos.text.toString().toIntOrNull())
                 registro.put("descripcion", editText4.getText().toString())
                 registro.put("tipo", spinner.selectedItem.toString())
+                registro.put("fechaConsumo", c.time.time)
+                registro.put("tomar", 1)
+
+
 
                 bd.insert("medicamentos", null, registro)
                 bd.close()

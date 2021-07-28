@@ -2,12 +2,13 @@ package com.example.remembermedicine
 
 import android.content.Intent
 import android.database.Cursor
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_list.view.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +34,16 @@ class MainActivity : AppCompatActivity() {
             description.add(resultados.getString(2))
             image.add(resultados.getString(3))
             toNextRow(resultados)
+
+            // estart servicio | demon
+            Intent(this, AlarmService::class.java).also {
+                startService(it)
+
+            }
+        } else {
+            Intent(this, AlarmService::class.java).also {
+                stopService(it)
+            }
         }
 
         bd.close()
@@ -40,8 +51,10 @@ class MainActivity : AppCompatActivity() {
         agregar.setOnClickListener {
             finish()
 
-            val otherScreen = Intent(this, to_Register::class.java)
-            startActivity(otherScreen)
+           Intent(this, to_Register::class.java).also {
+               startActivity(it)
+               
+           }
         }
 
 
@@ -59,9 +72,9 @@ class MainActivity : AppCompatActivity() {
 
     // mandar registros a creacion de lis
     private fun pintarLista() {
-        val myListAdapter = MyListAdapter(this,nombre,description,image,id)
+        val myListAdapter = MyListAdapter(this, nombre, description, image, id)
         listView.adapter = myListAdapter
-        listView.setOnItemClickListener(){adapterView, view, position, id ->
+        listView.setOnItemClickListener(){ adapterView, view, position, id ->
             val itemAtPos = adapterView.getItemAtPosition(position)
             val idRegister = Integer.parseInt(adapterView.get(position).idRegister.text.toString()) // recuperar la clave primeria
             //Toast.makeText(this, "Click on item at $itemAtPos its item id $idRegister", Toast.LENGTH_LONG).show()
@@ -69,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             finish()
 
             val otherScreen = Intent(this, showMedicine::class.java)
-            otherScreen.putExtra("id",idRegister)
+            otherScreen.putExtra("id", idRegister)
             startActivity(otherScreen)
         }
     }

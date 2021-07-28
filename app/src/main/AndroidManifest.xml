@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RememberMedicine">
-        <activity android:name=".showMedicine"></activity>
+        <service
+            android:name=".AlarmService"
+            android:enabled="true"
+            android:exported="true"
+            android:stopWithTask="false"></service>
+
+        <activity android:name=".showMedicine" />
         <activity android:name=".to_Register" />
         <activity android:name=".MainActivity">
             <intent-filter>
