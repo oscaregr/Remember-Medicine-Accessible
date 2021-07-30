@@ -139,8 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#DFD1D1"
-                android:dropDownSelector="@color/material_on_primary_disabled"
-                android:spinnerMode="dropdown" />
+                 />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -1,10 +1,13 @@
 package com.example.remembermedicine
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_show_medicine.*
+import kotlinx.android.synthetic.main.activity_to__register.*
+import java.util.*
 
 class showMedicine : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +48,9 @@ class showMedicine : AppCompatActivity() {
 
             tipo.contentDescription = fila.getString(7)
 
+            if (fila.getInt(9).equals(1))
+                does.isEnabled = true
+
         }
         bd.close()
 
@@ -75,6 +81,32 @@ class showMedicine : AppCompatActivity() {
             finish()
             val otherScreen = Intent(this, MainActivity::class.java)
             startActivity(otherScreen)
+        }
+
+        does.setOnClickListener {
+            does.isEnabled = false
+            val date = Calendar.getInstance()
+
+            val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
+            val bd = admin.writableDatabase
+            val registro = ContentValues()
+
+            fila.getInt(3)?.let { it1 -> date.add(Calendar.DAY_OF_YEAR, it1) }
+            fila.getInt(4)?.let { it1 -> date.add(Calendar.HOUR_OF_DAY, it1) }
+            fila.getInt(5)?.let { it1 -> date.add(Calendar.MINUTE, it1) }
+
+            registro.put("fechaConsumo", date.time.time)
+            registro.put("tomar", 0) // medicamento a tomar
+
+            bd.update("medicamentos", registro, "id= '${idRegister}'", null)
+            bd.close()
+
+            finish()
+
+            Intent(this, MainActivity::class.java).also {
+                startActivity(it)
+            }
+
         }
 
     //Toast.makeText(this, "No existe un Cliente con dicho nombre", Toast.LENGTH_SHORT).show()
