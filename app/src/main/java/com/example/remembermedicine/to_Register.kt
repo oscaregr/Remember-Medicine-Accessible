@@ -69,17 +69,8 @@ class to_Register : AppCompatActivity() {
                 registro.put("descripcion", editText4.getText().toString())
                 registro.put("tipo", spinner.selectedItem.toString())
 
-
-
                 val cant = bd.update("medicamentos", registro, "id= '${idRegister}'", null)
                 bd.close()
-
-                editText1.setText("")
-                editText2.setText("")
-                editText4.setText("")
-                dias.setText("")
-                horas.setText("")
-                minutos.setText("")
 
                 if (cant == 1)
                     Toast.makeText(this, "Se modificaron los datos", Toast.LENGTH_SHORT).show()
@@ -94,7 +85,6 @@ class to_Register : AppCompatActivity() {
 
             } else {
 
-
                 val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
                 val bd = admin.writableDatabase
                 val registro = ContentValues()
@@ -104,7 +94,6 @@ class to_Register : AppCompatActivity() {
                 dias.text.toString().toIntOrNull()?.let { it1 -> c.add(Calendar.DAY_OF_YEAR, it1) }
                 horas.text.toString().toIntOrNull()?.let { it1 -> c.add(Calendar.HOUR_OF_DAY, it1) }
                 minutos.text.toString().toIntOrNull()?.let { it1 -> c.add(Calendar.MINUTE, it1) }
-
 
                 registro.put("nombre", editText1.getText().toString())
                 registro.put("dosis", editText2.getText().toString())
@@ -116,21 +105,21 @@ class to_Register : AppCompatActivity() {
                 registro.put("fechaConsumo", c.time.time)
                 registro.put("tomar", 1)
 
-
-
                 bd.insert("medicamentos", null, registro)
+
+                val fila = bd.rawQuery("select * from medicamentos", null)
+                fila.moveToLast()
+                val idMedicine = fila.getInt(0)
+
+                fila.close()
                 bd.close()
-                editText1.setText("")
-                editText2.setText("")
-                editText4.setText("")
-                dias.setText("")
-                horas.setText("")
-                minutos.setText("")
+
                 Toast.makeText(this, "Se cargaron los datos del medicamento", Toast.LENGTH_SHORT).show()
 
                 finish()
 
-                val otherScreen = Intent(this, MainActivity::class.java)
+                val otherScreen = Intent(this, showMedicine::class.java)
+                otherScreen.putExtra("id", idMedicine)
                 startActivity(otherScreen)
             }
         }

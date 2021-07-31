@@ -2,10 +2,10 @@ package com.example.remembermedicine
 
 import android.app.*
 import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.media.Ringtone
 import android.media.RingtoneManager
 import android.os.*
 import androidx.core.app.NotificationCompat
@@ -26,29 +26,30 @@ class AlarmService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        crash = false
+
     }
 
     fun refresh(bd: SQLiteDatabase): Cursor? {
-        //get date actual
         // optener base de datos
         val resultados = bd.rawQuery("select * from medicamentos where tomar=0", null)
         return resultados
     }
 
-    fun AlarmDetect(datos: Cursor?, bd: SQLiteDatabase) {
+    fun AlarmDetect(datos: Cursor?, bd: SQLiteDatabase, r: Ringtone) {
 
         if (datos?.count!! > 0) {
             datos!!.moveToFirst()
             val date = Calendar.getInstance()
 
-            if (date.time.time.toString() == datos!!.getLongOrNull(8).toString()) {
-                startAlarm(datos!!.getInt(0), bd)
+            if (date.time.time.toString() >= datos!!.getLongOrNull(8).toString()) {
+                startNotification(datos)
+                startAlarm(datos!!.getInt(0), bd, r)
             }
 
             while(datos!!.moveToNext()){
-                if (date.time.time.toString() == datos!!.getLongOrNull(8).toString()) {
-                    startAlarm(datos!!.getInt(0), bd)
+                if (date.time.time.toString() >= datos!!.getLongOrNull(8).toString()) {
+                    startNotification(datos)
+                    startAlarm(datos!!.getInt(0), bd, r)
                 }
             }
         } else {
@@ -61,6 +62,15 @@ class AlarmService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
+        crash = false
+        update = false
+
+        val r = RingtoneManager.getRingtone(
+                getApplicationContext(), RingtoneManager.getDefaultUri(
+                RingtoneManager.TYPE_RINGTONE
+        )
+        )
+
         val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
         val bd = admin.writableDatabase
 
@@ -69,7 +79,7 @@ class AlarmService : Service() {
         /// calis code
         val handler = object : Handler(Looper.getMainLooper()) {
             override fun handleMessage(msg: Message) {
-                AlarmDetect(datosActualizados, bd)
+                AlarmDetect(datosActualizados, bd, r)
                 //super.handleMessage(msg)
                 //Toast.makeText(this, "5 secs has passed", Toast.LENGTH_SHORT).show()
             }
@@ -100,17 +110,16 @@ class AlarmService : Service() {
         return super.onStartCommand(intent, flags, startId)
     }
 
-    fun startAlarm(int: Int, bd: SQLiteDatabase) {
+    fun startAlarm(int: Int, bd: SQLiteDatabase, r: Ringtone) {
         // sonido de alarma
-        val r = RingtoneManager.getRingtone(
-            getApplicationContext(), RingtoneManager.getDefaultUri(
-                RingtoneManager.TYPE_RINGTONE
-            )
-        )
+
+
 
         val registro = ContentValues()
         registro.put("tomar", 1) // medicamento a tomar
         bd.update("medicamentos", registro, "id= '${int}'", null)
+
+        update = !update
 
         r.play()
 
@@ -123,29 +132,23 @@ class AlarmService : Service() {
             }
         }, 30 * 1000)
 
-        update = !update
-
     }
 
     //crear notificacion
-    fun startNotification(resultados: Cursor) {
-        /*var alarmMgr: AlarmManager? = null
-        lateinit var alarmIntent: PendingIntent
+    fun startNotification(resultados: Cursor?) {
 
-        alarmMgr = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmIntent = Intent(this, NotificationReseiver::class.java).let { intent ->
-            PendingIntent.getBroadcast(this, 0, intent, 0)
+        // activity to start
+        val resultIntent = Intent(this, showMedicine::class.java)
+        resultIntent.putExtra("id", resultados?.getInt(0))
+        // Create the TaskStackBuilder
+        val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(this).run {
+            // Add the intent, which inflates the back stack
+            addNextIntentWithParentStack(resultIntent)
+            // Get the PendingIntent containing the entire back stack
+            getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        alarmMgr?.set(
-            AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            SystemClock.elapsedRealtime() + 60,
-            alarmIntent
-        )
-
-         */
-
-        /// posible jenera error
+        /// create notification
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 "Medicine Notification",
@@ -158,23 +161,22 @@ class AlarmService : Service() {
         }
 
         val builder = NotificationCompat.Builder(this, "Medicine Notification")
-        builder.setContentTitle("titulo")
-        builder.setContentText("Conetnido")
+        builder.setContentTitle(resultados?.getString(1))
+        builder.setContentText(resultados?.getString(6))
         builder.setAutoCancel(true)
-        //builder.setSmallIcon(imagen);
+        builder.setContentIntent(resultPendingIntent)
 
-        //builder.setSmallIcon(imagen);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder.setSmallIcon(R.mipmap.icon_medicine);
+            builder.setColor(ContextCompat.getColor(this, R.color.white))
+        } else {
+            builder.setSmallIcon(R.mipmap.icon_medicine);
+        }
+
         val managerCompat = NotificationManagerCompat.from(this)
         managerCompat.notify(1, builder.build())
 
-    }
-
-    fun cancelNotification () {
-        val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
-        val notification = Intent(this, AlarmService::class.java)
-        val penddingIntent = PendingIntent.getBroadcast(this, 1, notification, 0)
-
-        alarmManager?.cancel(penddingIntent)
+        return
     }
 
     override fun onDestroy () {

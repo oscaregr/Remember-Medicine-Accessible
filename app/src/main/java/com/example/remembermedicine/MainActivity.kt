@@ -35,18 +35,33 @@ class MainActivity : AppCompatActivity() {
             image.add(resultados.getString(3))
             toNextRow(resultados)
 
-            // estart servicio | demon
-            Intent(this, AlarmService::class.java).also {
-                startService(it)
-
-            }
-        } else {
-            Intent(this, AlarmService::class.java).also {
-                stopService(it)
-            }
         }
 
         bd.close()
+
+        val admin1 = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
+        val bd1 = admin1.writableDatabase
+        val file = bd1.rawQuery("select * from medicamentos where tomar=0", null)
+
+
+
+        // estart servicio | demon
+        if (file.count > 0)
+            Intent(this, AlarmService::class.java).also {
+                it.run {
+
+                }.runCatching {
+                    startService(it)
+                }
+            }
+        else
+            Intent(this, AlarmService::class.java).also {
+                stopService(it)
+            }
+
+        bd1.close()
+
+
 
         agregar.setOnClickListener {
             finish()
