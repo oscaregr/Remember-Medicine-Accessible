@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     tools:context=".to_Register">
 
     <!-- no camviar el layout principal, luego no jala -->
@@ -12,169 +13,218 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/encabezado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                >
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_marginTop="10dp"
+                    android:text="Registro"
+                    android:textColor="#FFFFFF"
+                    android:layout_centerVertical="true"
+                    android:layout_centerInParent="true"
+                    android:textSize="48sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+            </RelativeLayout>
 
             <LinearLayout
+                android:layout_below="@id/encabezado"
+                android:layout_marginTop="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="40">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editText1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nombre del medicamento"
+                        android:inputType="text"
+                        android:textSize="28dp"
+                        android:background="#FFFFFF"
+                        android:padding="15dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:contentDescription="Nombre del medicamento"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="40">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Dosis a cosumir"
+                        android:inputType="text"
+                        android:textSize="28dp"
+                        android:background="#FFFFFF"
+                        android:padding="15dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:contentDescription="Dosis a tomar"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Nombre"
+                    android:text="Lapso de tiempo para consumo"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="28dp"
+
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:errorEnabled="true"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="2">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/dias"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Dias"
+                            android:inputType="number"
+                            android:background="#FFFFFF"
+                            android:padding="15dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:errorEnabled="true"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="2"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/horas"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Hrs"
+                            android:inputType="number"
+                            android:background="#FFFFFF"
+                            android:padding="15dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:errorEnabled="true"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="2"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/minutos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Min"
+                            android:inputType="number"
+                            android:background="#FFFFFF"
+                            android:padding="15dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Tipo de medicamento"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="28dp"/>
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#DFD1D1"
+                     />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Descripción"
                     android:layout_marginRight="10dp"
                     android:textColor="@color/black"
                     android:textSize="28dp"/>
 
                 <EditText
-                    android:id="@+id/editText1"
+                    android:id="@+id/editText4"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="17dp"
                     android:ems="10"
                     android:gravity="center"
-                    android:hint="Nombre del medicamento"
-                    android:inputType="textPersonName"
+                    android:hint="Descripcion"
+                    android:inputType="textMultiLine"
                     android:padding="15dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     />
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
+                <Button
+                    android:id="@+id/boton1"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Dosis"
-                    android:layout_marginRight="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="28dp"/>
-
-                <EditText
-                    android:id="@+id/editText2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:text="Guardar"
                     android:layout_gravity="center"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:hint="Cantidad a consumir"
-                    android:inputType="textPersonName"
-                    android:padding="15dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     />
 
             </LinearLayout>
-
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Lapso de tiempo para consumo"
-                android:layout_marginRight="10dp"
-                android:textColor="@color/black"
-                android:textSize="28dp"
-                />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <EditText
-                    android:id="@+id/dias"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:inputType="number"
-                    android:maxLines="3"
-                    android:hint="Dias"
-                    android:padding="15dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    />
-
-                <EditText
-                    android:id="@+id/horas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:hint="Horas"
-                    android:inputType="number"
-                    android:maxLines="2"
-                    android:padding="15dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-                <EditText
-                    android:id="@+id/minutos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:inputType="number"
-                    android:maxLines="2"
-                    android:hint="Minutos"
-                    android:padding="15dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Tipo de medicamento"
-                android:layout_marginRight="10dp"
-                android:textColor="@color/black"
-                android:textSize="28dp"/>
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#DFD1D1"
-                 />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Descripción"
-                android:layout_marginRight="10dp"
-                android:textColor="@color/black"
-                android:textSize="28dp"/>
-
-            <EditText
-                android:id="@+id/editText4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="17dp"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="Descripcion"
-                android:inputType="textMultiLine"
-                android:padding="15dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                />
-
-
-            <Button
-                android:id="@+id/boton1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:text="Guardar"
-                android:layout_gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                />
-
-        </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 
 </LinearLayout>
