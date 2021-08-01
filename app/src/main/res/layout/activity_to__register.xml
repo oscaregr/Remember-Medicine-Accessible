@@ -9,40 +9,41 @@
 
     <!-- no camviar el layout principal, luego no jala -->
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/encabezado"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            >
 
-            <RelativeLayout
-                android:id="@+id/encabezado"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/title"
+                android:layout_marginTop="10dp"
+                android:text="Registro"
+                android:textColor="#FFFFFF"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:textSize="48sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                >
+                />
 
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_marginTop="10dp"
-                    android:text="Registro"
-                    android:textColor="#FFFFFF"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
-                    android:textSize="48sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+        </RelativeLayout>
 
-            </RelativeLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/encabezado"
+            android:layout_marginBottom="20dp">
 
             <LinearLayout
                 android:layout_below="@id/encabezado"
-                android:layout_marginTop="40dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -51,12 +52,13 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/nombre"
                     app:errorEnabled="true"
+                    android:background="@drawable/custom_input"
                     app:counterEnabled="true"
                     app:counterMaxLength="40">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editText1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Nombre del medicamento"
@@ -66,6 +68,7 @@
                         android:padding="15dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:contentDescription="Nombre del medicamento"
+                        android:drawableRight="@drawable/ic_medicine"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -74,6 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
+                    android:background="@drawable/custom_input"
                     app:counterEnabled="true"
                     app:counterMaxLength="40">
 
@@ -86,6 +90,7 @@
                         android:textSize="28dp"
                         android:background="#FFFFFF"
                         android:padding="15dp"
+                        android:drawableRight="@drawable/ic_cantidad"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:contentDescription="Dosis a tomar"
                         />
@@ -113,11 +118,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:errorEnabled="true"
+                        android:id="@+id/dias"
                         app:counterEnabled="true"
                         app:counterMaxLength="2">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/dias"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Dias"
@@ -134,12 +139,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:errorEnabled="true"
+                        android:id="@+id/horas"
                         app:counterEnabled="true"
                         app:counterMaxLength="2"
                         >
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/horas"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Hrs"
@@ -156,12 +161,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:errorEnabled="true"
+                        android:id="@+id/minutos"
                         app:counterEnabled="true"
                         app:counterMaxLength="2"
                         >
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/minutos"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Min"
@@ -173,7 +178,37 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_alarm"
+                        android:layout_marginLeft="30dp"
+                        android:layout_gravity="center_vertical"
+                        />
+
                 </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbarStyle="insideInset"
+                    android:hint="Seleccionar tipo de medicamento"
+                    android:backgroundTint="#FFFFFF"
+                    >
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.AppCompat.Spinner.DropDown"
+                        android:textSize="21dp"
+                        app:endIconDrawable="@drawable/ic_type_medicine"
+                        android:inputType="none"
+                        android:textColor="#000"
+                        android:backgroundTint="#FFFFFF"/>
+
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -184,47 +219,51 @@
                     android:textSize="28dp"/>
 
                 <Spinner
-                    android:id="@+id/spinner"
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#DFD1D1"
                      />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Descripción"
-                    android:layout_marginRight="10dp"
-                    android:textColor="@color/black"
-                    android:textSize="28dp"/>
 
-                <EditText
-                    android:id="@+id/editText4"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="17dp"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:hint="Descripcion"
-                    android:inputType="textMultiLine"
-                    android:padding="15dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    />
+                    app:errorEnabled="true"
+                    app:counterEnabled="true"
+                    android:background="@drawable/custom_input"
+                    app:counterMaxLength="50">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editText4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Descripcion"
+                        android:inputType="textMultiLine"
+                        android:textSize="28dp"
+                        android:background="#FFFFFF"
+                        android:padding="15dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:contentDescription="Descripcion del medicamento, ¿Para que es?"
+                        android:drawableRight="@drawable/ic_enfermedad" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/boton1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/button_design"
                     android:gravity="bottom"
                     android:text="Guardar"
-                    android:layout_gravity="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    />
+                    android:textColor="#954535"
+                    app:backgroundTint="#FFFFFF"
+                    android:shadowColor="#954535"/>
 
             </LinearLayout>
-        </RelativeLayout>
-    </ScrollView>
-
+        </ScrollView>
+    </RelativeLayout>
 </LinearLayout>
