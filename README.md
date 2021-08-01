@@ -14,5 +14,13 @@ Notificaciones con las alaramas redireccionanado al medicamento al click
 
 !!Pendientes!!
 
-El editar, modificar la alarma en caso de que el lapso se cambie cunado se encuentre pendiente
-Rediseñar mas estetico
+Mantener el servicio en ejecucion en todo momento. 
+El editar, modificar la alarma en caso de que el lapso se cambie cunado se encuentre 
+pendiente. 
+Acomodar el spinner de registro. 
+Acomodar el tamaño y color del boton flotante. 
+Rediseñar el despliegue de informacion de medicamento. 
+Acomodar los contenDescription y calar la app con TalkBack 
+Acomodar el tamaño del icono
+agregar inalador por la nariz y ampolletas
+Editar las imagenes
