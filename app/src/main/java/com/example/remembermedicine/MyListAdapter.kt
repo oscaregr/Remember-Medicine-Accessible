@@ -2,11 +2,24 @@ package com.example.remembermedicine
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.TextView
 
 class MyListAdapter(private val context: Activity, private val title: ArrayList<String>, private val description: ArrayList<String>, private val imgid: ArrayList<String>, private val id: ArrayList<Int>)
     : ArrayAdapter<String>(context, R.layout.custom_list, title) {
 
+
+    /// calis code
+    private var mActivity: MainActivity? = null
+
+
+    fun setActivity(activity: MainActivity) {
+        mActivity = activity
+    }
+
+
+    /// code que funciona
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
 
         val inflater = context.layoutInflater
@@ -22,7 +35,7 @@ class MyListAdapter(private val context: Activity, private val title: ArrayList<
         when (imgid[position])
         {
             "Pastillas" -> imageView.setImageResource(R.drawable.pills_free)
-            "Capsulas" ->  imageView.setImageResource(R.drawable.capsulas)
+            "Capsulas" -> imageView.setImageResource(R.drawable.capsulas)
             "Inalador" -> imageView.setImageResource(R.drawable.inalador_free)
             "Gotas" -> imageView.setImageResource(R.drawable.gotas)
             "Crema untable" -> imageView.setImageResource(R.drawable.gel_untable)
