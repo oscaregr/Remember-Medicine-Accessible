@@ -8,12 +8,16 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.database.getLongOrNull
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_to__register.*
 import java.util.*
 
 
 class to_Register : AppCompatActivity() {
+
+    var date = arrayListOf<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_to__register)
@@ -55,6 +59,11 @@ class to_Register : AppCompatActivity() {
                     horas.editText?.setText(fila.getInt(4).toString())
                 else if (fila.getInt(5) != 0)
                     minutos.editText?.setText(fila.getInt(5).toString())
+
+                date.add(fila.getInt(3))
+                date.add(fila.getInt(4))
+                date.add(fila.getInt(5))
+                date.add(fila.getInt(9))//get if the medicine are on wait for take
 
                 editText4.setText(fila.getString(6))
 
@@ -114,6 +123,42 @@ class to_Register : AppCompatActivity() {
             registro.put("minutos", minutos.editText?.text.toString().toIntOrNull())
             registro.put("descripcion", editText4.getText().toString())
             registro.put("tipo", spinner.selectedItem.toString())
+
+            if (date[3] == 0) {
+                val c = Calendar.getInstance()
+
+                dias.editText?.text.toString().toIntOrNull()?.let { it1 -> c.add(
+                        Calendar.DAY_OF_YEAR,
+                        it1
+                ) }
+
+                date[0]?.let { it1 -> c.set(
+                        Calendar.DAY_OF_YEAR,
+                        it1
+                ) }
+
+                horas.editText?.text.toString().toIntOrNull()?.let { it1 -> c.add(
+                        Calendar.HOUR_OF_DAY,
+                        it1
+                ) }
+
+                date[1]?.let { it1 -> c.set(
+                        Calendar.HOUR_OF_DAY,
+                        it1
+                ) }
+
+                minutos.editText?.text.toString().toInt()?.let { it1 -> c.add(
+                        Calendar.MINUTE,
+                        it1
+                ) }
+
+                date[2]?.let { it1 -> c.set(
+                        Calendar.MINUTE,
+                        it1
+                ) }
+
+                registro.put("fechaConsumo", c.time.time)
+            }
 
             val cant = bd.update("medicamentos", registro, "id= '${idRegister}'", null)
             bd.close()

@@ -27,12 +27,14 @@ class showMedicine : AppCompatActivity() {
 
             dosis.text = "Dosis ${fila.getString(2)}"
 
-            if (fila.getInt(3) != 0 && fila.getInt(4) != 0 && fila.getInt(5) != 0)
-                lapso.text = "Cada ${fila.getInt(3)} dias, ${fila.getInt(4)} horas, ${fila.getInt(5)} minutos."
-            else if (fila.getInt(4) != 0 && fila.getInt(5) != 0)
-                lapso.text = "Cada ${fila.getInt(4)} horas, ${fila.getInt(5)} minutos."
+            lapso.text = "Cada "
+
+            if (fila.getInt(3) != 0)
+                lapso.text =  "${lapso.text} ${fila.getInt(3)} dias"
+            else if (fila.getInt(4) != 0)
+                lapso.text = "${lapso.text} ${fila.getInt(4)} horas"
             else if (fila.getInt(5) != 0)
-                lapso.text = "Cada ${fila.getInt(5)} minutos."
+                lapso.text = "${lapso.text} ${fila.getInt(5)} minutos"
 
             descripcion.text = fila.getString(6)
 

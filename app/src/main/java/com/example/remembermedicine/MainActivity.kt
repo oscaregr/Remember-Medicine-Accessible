@@ -87,20 +87,11 @@ class MainActivity : AppCompatActivity() {
 
     // mandar registros a creacion de lis
     private fun pintarLista() {
-
-        //calis code
-        CustomListAdapter adapter = new .....;
-        adapter.setActivity(this);
-
-
-        // code que funcionava
         val myListAdapter = MyListAdapter(this, nombre, description, image, id)
         listView.adapter = myListAdapter
         listView.setOnItemClickListener(){ adapterView, view, position, id ->
-            //val itemAtPos = adapterView.getItemAtPosition(position)
-            val idRegister = Integer.parseInt(adapterView[position].hashCode().)///adapterView.get(position).//.idRegister.text.toString()) // recuperar la clave primeria
-            //Toast.makeText(this, "Click on item at $itemAtPos its item id $idRegister", Toast.LENGTH_LONG).show()
 
+            val idRegister = this.id.get(position)
             finish()
 
             val otherScreen = Intent(this, showMedicine::class.java)
@@ -108,17 +99,4 @@ class MainActivity : AppCompatActivity() {
             startActivity(otherScreen)
         }
     }
-
-    var mListener: onClickListener = object : OnClickListener() {
-        fun onClick(view: View) {
-            count++
-            view.setBackgroundColor(color.list_row_bg)
-            //
-            //Some changes has to be made for the main activity's layout
-            //
-
-            // Here you can delete add or do anything to your views
-        }
-    }
-
 }
