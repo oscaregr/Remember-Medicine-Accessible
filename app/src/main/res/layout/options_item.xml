@@ -5,6 +5,7 @@
     android:ellipsize="end"
     android:maxLines="1"
     android:padding="16dp"
+    android:background="#e1b395"
     android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
     >
 

@@ -2,11 +2,12 @@ package com.example.remembermedicine
 
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_show_medicine.*
-import kotlinx.android.synthetic.main.activity_to__register.*
 import java.util.*
 
 class showMedicine : AppCompatActivity() {
@@ -38,19 +39,20 @@ class showMedicine : AppCompatActivity() {
             when (fila.getString(7))
             {
                 "Pastillas" -> tipo.setImageResource(R.drawable.pills_free)
-                "Capsulas" ->  tipo.setImageResource(R.drawable.capsulas_free)
+                "Capsulas" ->  tipo.setImageResource(R.drawable.capsulas)
                 "Inalador" -> tipo.setImageResource(R.drawable.inalador_free)
                 "Gotas" -> tipo.setImageResource(R.drawable.gotas)
                 "Crema untable" -> tipo.setImageResource(R.drawable.gel_untable)
                 "Gel consumible" -> tipo.setImageResource(R.drawable.gel_consumible)
                 "Inyección" -> tipo.setImageResource(R.drawable.injeccion)
+                "Ampolletas" -> tipo.setImageResource(R.drawable.ampolleta)
+                "Inalador via nazal" -> tipo.setImageResource(R.drawable.inalador_nazal)
             }
 
             tipo.contentDescription = fila.getString(7)
 
             if (fila.getInt(9).equals(1))
                 does.isEnabled = true
-
         }
         bd.close()
 

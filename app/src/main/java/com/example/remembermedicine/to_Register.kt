@@ -25,7 +25,9 @@ class to_Register : AppCompatActivity() {
             "Gotas",
             "Crema untable",
             "Gel consumible",
-            "Inyección"
+            "Inyección",
+            "Ampolletas",
+            "Inalador via nazal"
         )
         val adaptador1 = ArrayAdapter<String>(this, R.layout.options_item, lista)
         spinner.adapter = adaptador1
@@ -61,6 +63,20 @@ class to_Register : AppCompatActivity() {
             }
 
             bd.close()
+
+        }
+
+        back.setOnClickListener {
+            finish()
+            if (edit == true)
+                Intent(this, showMedicine::class.java).also {
+                    it.putExtra("id",idRegister)
+                    startActivity(it)
+                }
+            else
+                Intent(this, MainActivity::class.java).also {
+                    startActivity(it)
+                }
 
         }
 

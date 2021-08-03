@@ -70,12 +70,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:backgroundTint="#D2691E"
+            android:backgroundTint="#f69b61"
+            android:padding="20dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="25dp"
+            android:contentDescription="Agregar medicamento"
             app:elevation="6dp"
-            app:fabSize="auto"
             app:srcCompat="@android:drawable/ic_input_add"
             />
 

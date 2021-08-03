@@ -22,12 +22,14 @@ class MyListAdapter(private val context: Activity, private val title: ArrayList<
         when (imgid[position])
         {
             "Pastillas" -> imageView.setImageResource(R.drawable.pills_free)
-            "Capsulas" ->  imageView.setImageResource(R.drawable.capsulas_free)
+            "Capsulas" ->  imageView.setImageResource(R.drawable.capsulas)
             "Inalador" -> imageView.setImageResource(R.drawable.inalador_free)
             "Gotas" -> imageView.setImageResource(R.drawable.gotas)
             "Crema untable" -> imageView.setImageResource(R.drawable.gel_untable)
             "Gel consumible" -> imageView.setImageResource(R.drawable.gel_consumible)
             "Inyección" -> imageView.setImageResource(R.drawable.injeccion)
+            "Ampolletas" -> imageView.setImageResource(R.drawable.ampolleta)
+            "Inalador via nazal" -> imageView.setImageResource(R.drawable.inalador_nazal)
         }
 
         imageView.contentDescription = imgid[position]
@@ -37,6 +39,5 @@ class MyListAdapter(private val context: Activity, private val title: ArrayList<
 
         return rowView
     }
-
 
 }
