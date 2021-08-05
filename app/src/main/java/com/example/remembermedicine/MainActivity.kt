@@ -1,13 +1,13 @@
 package com.example.remembermedicine
 
+import android.content.ContentValues
 import android.content.Intent
 import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
+import androidx.core.database.getLongOrNull
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.custom_list.view.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         // recuperar registros
         val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
         val bd = admin.writableDatabase
-        val resultados = bd.rawQuery("select id, nombre, descripcion, tipo from medicamentos", null)
+        val resultados = bd.rawQuery("select id, nombre, descripcion, tipo, fechaConsumo from medicamentos", null)
 
         if (resultados.count > 0){
 
@@ -33,7 +33,16 @@ class MainActivity : AppCompatActivity() {
             nombre.add(resultados.getString(1))
             description.add(resultados.getString(2))
             image.add(resultados.getString(3))
-            toNextRow(resultados)
+
+            // active buton on items
+            val date = Calendar.getInstance()
+            if (date.time.time.toString() >= resultados!!.getLongOrNull(4).toString()) {
+                val registro = ContentValues()
+                registro.put("tomar", 1) // medicamento a tomar
+                bd.update("medicamentos", registro, "id= '${resultados.getInt(0)}'", null)
+            }
+
+            toNextRow(resultados, bd)
 
         }
 
@@ -41,12 +50,10 @@ class MainActivity : AppCompatActivity() {
 
         val admin1 = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
         val bd1 = admin1.writableDatabase
-        val file = bd1.rawQuery("select * from medicamentos where tomar=0", null)
-
-
+        //val file = bd1.rawQuery("select * from medicamentos where tomar=0", null)
 
         // estart servicio | demon
-        if (file.count > 0)
+        /*if (file.count > 0)
             Intent(this, AlarmService::class.java).also {
                 it.run {
 
@@ -58,6 +65,7 @@ class MainActivity : AppCompatActivity() {
             Intent(this, AlarmService::class.java).also {
                 stopService(it)
             }
+            */
 
         bd1.close()
 
@@ -75,12 +83,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun toNextRow(resultados: Cursor) {
+    private fun toNextRow(resultados: Cursor, bd: SQLiteDatabase) {
+        val date = Calendar.getInstance()
+
         while(resultados.moveToNext()){
             id.add(resultados.getInt(0))
             nombre.add(resultados.getString(1))
             description.add(resultados.getString(2))
             image.add(resultados.getString(3))
+
+            if (date.time.time.toString() >= resultados!!.getLongOrNull(4).toString()) {
+                val registro = ContentValues()
+                registro.put("tomar", 1) // medicamento a tomar
+                bd.update("medicamentos", registro, "id= '${resultados.getInt(0)}'", null)
+            }
         }
         pintarLista()
     }

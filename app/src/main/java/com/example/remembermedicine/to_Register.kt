@@ -2,12 +2,18 @@ package com.example.remembermedicine
 
 //import kotlinx.android.synthetic.main.activity_show_medicine.*
 
+import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.ContentValues
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.database.getLongOrNull
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_to__register.*
@@ -158,6 +164,47 @@ class to_Register : AppCompatActivity() {
                 ) }
 
                 registro.put("fechaConsumo", c.time.time)
+
+                try {
+
+                    val intent = Intent(this,MyReceiverNotification::class.java)
+
+                    val penddingIntent = PendingIntent.getBroadcast(this, 0,intent,0)
+
+                    val alarmService = this.getSystemService(ALARM_SERVICE) as AlarmManager?
+
+                    alarmService?.cancel(penddingIntent);
+
+                } catch (e: Exception) {
+
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val channel = NotificationChannel(
+                            "Medicine Notification",
+                            "Medicine Notification",
+                            NotificationManager.IMPORTANCE_DEFAULT
+                    )
+                    val manager: NotificationManager? =
+                            ContextCompat.getSystemService(this, NotificationManager::class.java)
+                    manager!!.createNotificationChannel(channel)
+                }
+
+                val intent = Intent("send.info");
+                intent.putExtra("id", idRegister)
+                intent.putExtra("name", nombre.editText?.text.toString())
+                intent.putExtra("description", editText4.getText().toString())
+                sendBroadcast(intent)
+
+                val penddingIntent = PendingIntent.getBroadcast(this, 0,intent,0)
+
+                val alarmService = this.getSystemService(ALARM_SERVICE) as AlarmManager?
+
+                val currentTime = Calendar.getInstance()
+                if (c.time.time <= currentTime.time.time)
+                    alarmService?.set(AlarmManager.RTC_WAKEUP, currentTime.time.time, penddingIntent)
+                else
+                    alarmService?.set(AlarmManager.RTC_WAKEUP, c.time.time, penddingIntent)
             }
 
             val cant = bd.update("medicamentos", registro, "id= '${idRegister}'", null)
