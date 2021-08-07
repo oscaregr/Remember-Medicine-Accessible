@@ -4,23 +4,25 @@ import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
 import android.content.ContentValues
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.database.getLongOrNull
 import kotlinx.android.synthetic.main.activity_show_medicine.*
 import java.util.*
 
+
 class showMedicine : AppCompatActivity() {
 
     var idRegister: Int = 0
+    var tomar: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +30,7 @@ class showMedicine : AppCompatActivity() {
 
         idRegister = getIntent().getExtras()?.getInt("id")!!
 
-        update()
+        update() // reset button
 
         // llenar la con los datos
         val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
@@ -66,7 +68,9 @@ class showMedicine : AppCompatActivity() {
 
             tipo.contentDescription = fila.getString(7)
 
-            if (fila.getInt(9).equals(1))
+            tomar = fila.getInt(9)
+
+            if (tomar.equals(1))
                 does.isEnabled = true
         }
         bd.close()
@@ -78,42 +82,56 @@ class showMedicine : AppCompatActivity() {
         }
 
         edit.setOnClickListener {
-            finish()
-            val otherScreen = Intent(this, to_Register::class.java)
-            otherScreen.putExtra("edit", true)
-            otherScreen.putExtra("idRegister", idRegister)
-            startActivity(otherScreen)
+
+            if (tomar == 0){
+                val builder1: AlertDialog.Builder = AlertDialog.Builder(this)
+                builder1.setMessage("Si continuas, la Alarma actual sera eliminada")
+                builder1.setCancelable(true)
+
+                builder1.setPositiveButton(
+                        "Continuar",
+                        { dialog, id ->
+                            deleteNotification()
+                            dialog.cancel()
+                            goToEdit()
+                        }
+                )
+
+                builder1.setNegativeButton(
+                        "Cancelar",
+                        { dialog, id -> dialog.cancel() })
+
+                val alert11: AlertDialog = builder1.create()
+                alert11.show()
+            } else {
+                goToEdit()
+            }
         }
 
         delete.setOnClickListener {
+            val builder1: AlertDialog.Builder = AlertDialog.Builder(this)
+            if (tomar == 0)
+                builder1.setMessage("Seguro que desea elmiminar este medicamento y su Alarma pendiente" )
+            else
+                builder1.setMessage("Seguro que desea elmiminar este medicamento" )
 
-            val i = Intent(this,MyReceiverNotification::class.java)
-            i.setAction("send.info")
-            i.putExtra("id",idRegister)
-            val alarmService = getSystemService(Context.ALARM_SERVICE) as AlarmManager?
+            builder1.setCancelable(true)
 
-            val pendingIntent = PendingIntent.getBroadcast(
-                    applicationContext, idRegister, i, 0)
-            alarmService!!.cancel(pendingIntent)
-            pendingIntent.cancel()
+            builder1.setPositiveButton(
+                    "Continuar",
+                    { dialog, id ->
+                        deleteNotification()
+                        deleteMedicine()
+                        dialog.cancel()
+                    }
+            )
 
-            val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
-            val bd = admin.writableDatabase
+            builder1.setNegativeButton(
+                    "Cancelar",
+                    { dialog, id -> dialog.cancel() })
 
-            val fila = bd.rawQuery("select fechaConsumo from medicamentos where id='${idRegister}'", null)
-
-            fila.moveToFirst()
-
-            val cant = bd.delete("medicamentos", "id= '${idRegister}'", null)
-            bd.close()
-
-            if (cant == 1)
-                Toast.makeText(this, "Se borró el Medicamento", Toast.LENGTH_SHORT)
-                    .show()
-
-            finish()
-            val otherScreen = Intent(this, MainActivity::class.java)
-            startActivity(otherScreen)
+            val alert11: AlertDialog = builder1.create()
+            alert11.show()
         }
 
         does.setOnClickListener {
@@ -129,7 +147,7 @@ class showMedicine : AppCompatActivity() {
                 manager!!.createNotificationChannel(channel)
             }
 
-            val intent = Intent(this,MyReceiverNotification::class.java)
+            val intent = Intent(this, MyReceiverNotification::class.java)
             intent.setAction("send.info")
             intent.putExtra("id", fila.getInt(0))
             intent.putExtra("name", fila.getString(1))
@@ -170,14 +188,42 @@ class showMedicine : AppCompatActivity() {
     //Toast.makeText(this, "No existe un Cliente con dicho nombre", Toast.LENGTH_SHORT).show()
     }
 
+    fun deleteMedicine () {
+        val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
+        val bd = admin.writableDatabase
+
+        val fila = bd.rawQuery("select fechaConsumo from medicamentos where id='${idRegister}'", null)
+
+        fila.moveToFirst()
+
+        val cant = bd.delete("medicamentos", "id= '${idRegister}'", null)
+        bd.close()
+
+        if (cant == 1)
+            Toast.makeText(this, "Se borró el Medicamento", Toast.LENGTH_SHORT)
+                    .show()
+
+        finish()
+        val otherScreen = Intent(this, MainActivity::class.java)
+        startActivity(otherScreen)
+    }
+
+    fun goToEdit () {
+        finish()
+        val otherScreen = Intent(this, to_Register::class.java)
+        otherScreen.putExtra("edit", true)
+        otherScreen.putExtra("idRegister", idRegister)
+        startActivity(otherScreen)
+    }
+
     fun update () {
         val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
         val bd = admin.writableDatabase
-        val fila = bd.rawQuery("select * from medicamentos where id='${idRegister}'", null)
+        val fila = bd.rawQuery("select fechaConsumo, tomar from medicamentos where id='${idRegister}'", null)
         fila.moveToFirst()
         // active buton
         val date = Calendar.getInstance()
-        if (date.time.time.toString() >= fila!!.getLongOrNull(8).toString()) {
+        if (date.time.time.toString() >= fila.getLongOrNull(0).toString()) {
             val registro = ContentValues()
             registro.put("tomar", 1) // medicamento a tomar
             bd.update("medicamentos", registro, "id= '${fila.getInt(0)}'", null)
@@ -185,5 +231,17 @@ class showMedicine : AppCompatActivity() {
         bd.close()
 
         return
+    }
+
+    fun deleteNotification () {
+        val i = Intent(this, MyReceiverNotification::class.java)
+        i.setAction("send.info")
+        i.putExtra("id", idRegister)
+        val alarmService = getSystemService(Context.ALARM_SERVICE) as AlarmManager?
+
+        val pendingIntent = PendingIntent.getBroadcast(
+                applicationContext, idRegister, i, 0)
+        alarmService!!.cancel(pendingIntent)
+        pendingIntent.cancel()
     }
 }

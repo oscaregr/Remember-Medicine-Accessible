@@ -7,13 +7,12 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.graphics.drawable.toDrawable
 
 
 class MyReceiverNotification : BroadcastReceiver() {
@@ -35,6 +34,8 @@ class MyReceiverNotification : BroadcastReceiver() {
             descripcion = intent.extras!!.getString("description")
         }
 
+        val r = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+
         // to clik on notification
         val resultIntent = Intent(context, showMedicine::class.java)
         resultIntent.putExtra("id", id)
@@ -53,6 +54,8 @@ class MyReceiverNotification : BroadcastReceiver() {
         builder.setContentTitle(name)
         builder.setContentText(descripcion)
         builder.setAutoCancel(true)
+        builder.setSound(r)
+        builder.setVibrate(longArrayOf(0, 100, 200, 300))
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             builder.setSmallIcon(R.mipmap.icon_medicine);
@@ -61,7 +64,7 @@ class MyReceiverNotification : BroadcastReceiver() {
             builder.setSmallIcon(R.mipmap.icon_medicine);
         }
 
-        builder.setLargeIcon(Bitmap.createScaledBitmap(BitmapFactory.decodeResource( context.resources,R.mipmap.icon_medicine), 128, 128, false))
+        builder.setLargeIcon(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.resources, R.mipmap.icon_medicine), 128, 128, false))
 
         builder.setContentIntent(resultPendingIntent)
 

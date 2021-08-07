@@ -14,5 +14,11 @@ Notificaciones con las alaramas redireccionanado al medicamento al click
 
 !!Pendientes!!
 
-Mantener el servicio en ejecucion en todo momento.  
+Acomodar la creacion ydestruccion de alarmas en el To_register.
+Poner audio a la notificacion  
 Acomodar los contenDescription y calar la app con TalkBack
+
+
+!!Extra!! 
+Checar cambio de lenguaje
+Modo noche

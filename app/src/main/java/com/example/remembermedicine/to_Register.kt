@@ -2,27 +2,23 @@ package com.example.remembermedicine
 
 //import kotlinx.android.synthetic.main.activity_show_medicine.*
 
-import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.ContentValues
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.database.getLongOrNull
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_to__register.*
+import kotlinx.android.synthetic.main.activity_to__register.back
 import java.util.*
 
 
 class to_Register : AppCompatActivity() {
 
     var date = arrayListOf<Int>()
+
+    var idRegisterToEdit: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,44 +38,17 @@ class to_Register : AppCompatActivity() {
         val adaptador1 = ArrayAdapter<String>(this, R.layout.options_item, lista)
         spinner.adapter = adaptador1
 
-
-
         val edit = getIntent().getExtras()?.getBoolean("edit", false)
+
         val idRegister = getIntent().getExtras()?.getInt("idRegister")
-
-        if (edit == true) {
-
-            val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
-            val bd = admin.writableDatabase
-            val fila = bd.rawQuery("select * from medicamentos where id='${idRegister}'", null)
-
-            if (fila.moveToFirst()) {
-
-                nombre.editText?.setText(fila.getString(1))
-
-                editText2.setText(fila.getString(2))
-
-                if (fila.getInt(3) != 0)
-                    dias.editText?.setText(fila.getInt(3).toString())
-                else if (fila.getInt(4) != 0)
-                    horas.editText?.setText(fila.getInt(4).toString())
-                else if (fila.getInt(5) != 0)
-                    minutos.editText?.setText(fila.getInt(5).toString())
-
-                date.add(fila.getInt(3))
-                date.add(fila.getInt(4))
-                date.add(fila.getInt(5))
-                date.add(fila.getInt(9))//get if the medicine are on wait for take
-
-                editText4.setText(fila.getString(6))
-
-                spinner.setSelection(lista.indexOf(fila.getString(7).toString()))
-
-            }
-
-            bd.close()
-
+        if (idRegister != null) {
+            idRegisterToEdit = idRegister
         }
+
+
+        if (edit == true)
+            showMedicineInfo(lista, idRegister)
+
 
         back.setOnClickListener {
             finish()
@@ -96,7 +65,10 @@ class to_Register : AppCompatActivity() {
         }
 
         boton1.setOnClickListener {
-            doWhenIsCorrect(edit, idRegister)
+            if (edit == true)
+                editDataBase(idRegister)
+            else
+                addToDataBase()
         }
     }
 
@@ -111,163 +83,151 @@ class to_Register : AppCompatActivity() {
         }
     }
 
-    fun doWhenIsCorrect(edit: Boolean?, idRegister: Int?) {
+    fun showMedicineInfo(lista: Array<String>, idRegister: Int?) {
+        val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
+        val bd = admin.writableDatabase
+        val fila = bd.rawQuery("select * from medicamentos where id='${idRegister}'", null)
+
+        fila.moveToFirst()
+
+        nombre.editText?.setText(fila.getString(1))
+
+        editText2.setText(fila.getString(2))
+
+        if (fila.getInt(3) != 0)
+            dias.editText?.setText(fila.getInt(3).toString())
+        else if (fila.getInt(4) != 0)
+            horas.editText?.setText(fila.getInt(4).toString())
+        else if (fila.getInt(5) != 0)
+            minutos.editText?.setText(fila.getInt(5).toString())
+
+        date.add(fila.getInt(3))
+        date.add(fila.getInt(4))
+        date.add(fila.getInt(5))
+        date.add(fila.getInt(9))//get if the medicine are on wait for take
+
+        editText4.setText(fila.getString(6))
+
+        spinner.setSelection(lista.indexOf(fila.getString(7).toString()))
+
+        bd.close()
+    }
+
+    fun editDataBase(idRegister: Int?) {
 
         if (!validedNoEmpty(nombre))
             return
 
-        if (edit == true){
+        val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
+        val bd = admin.writableDatabase
+        val registro = ContentValues()
 
-            val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
-            val bd = admin.writableDatabase
-            val registro = ContentValues()
+        registro.put("nombre", nombre.editText?.text.toString())
+        registro.put("dosis", editText2.getText().toString())
+        registro.put("dias", dias.editText?.text.toString().toIntOrNull())
+        registro.put("horas", horas.editText?.text.toString().toIntOrNull())
+        registro.put("minutos", minutos.editText?.text.toString().toIntOrNull())
+        registro.put("descripcion", editText4.getText().toString())
+        registro.put("tipo", spinner.selectedItem.toString())
 
-            registro.put("nombre", nombre.editText?.text.toString())
-            registro.put("dosis", editText2.getText().toString())
-            registro.put("dias", dias.editText?.text.toString().toIntOrNull())
-            registro.put("horas", horas.editText?.text.toString().toIntOrNull())
-            registro.put("minutos", minutos.editText?.text.toString().toIntOrNull())
-            registro.put("descripcion", editText4.getText().toString())
-            registro.put("tipo", spinner.selectedItem.toString())
-
-            if (date[3] == 0) {
-                val c = Calendar.getInstance()
-
-                dias.editText?.text.toString().toIntOrNull()?.let { it1 -> c.add(
-                        Calendar.DAY_OF_YEAR,
-                        it1
-                ) }
-
-                date[0]?.let { it1 -> c.set(
-                        Calendar.DAY_OF_YEAR,
-                        it1
-                ) }
-
-                horas.editText?.text.toString().toIntOrNull()?.let { it1 -> c.add(
-                        Calendar.HOUR_OF_DAY,
-                        it1
-                ) }
-
-                date[1]?.let { it1 -> c.set(
-                        Calendar.HOUR_OF_DAY,
-                        it1
-                ) }
-
-                minutos.editText?.text.toString().toInt()?.let { it1 -> c.add(
-                        Calendar.MINUTE,
-                        it1
-                ) }
-
-                date[2]?.let { it1 -> c.set(
-                        Calendar.MINUTE,
-                        it1
-                ) }
-
-                registro.put("fechaConsumo", c.time.time)
-
-                try {
-
-                    val intent = Intent(this,MyReceiverNotification::class.java)
-
-                    val penddingIntent = PendingIntent.getBroadcast(this, 0,intent,0)
-
-                    val alarmService = this.getSystemService(ALARM_SERVICE) as AlarmManager?
-
-                    alarmService?.cancel(penddingIntent);
-
-                } catch (e: Exception) {
-
-                }
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val channel = NotificationChannel(
-                            "Medicine Notification",
-                            "Medicine Notification",
-                            NotificationManager.IMPORTANCE_DEFAULT
-                    )
-                    val manager: NotificationManager? =
-                            ContextCompat.getSystemService(this, NotificationManager::class.java)
-                    manager!!.createNotificationChannel(channel)
-                }
-
-                val intent = Intent("send.info");
-                intent.putExtra("id", idRegister)
-                intent.putExtra("name", nombre.editText?.text.toString())
-                intent.putExtra("description", editText4.getText().toString())
-                sendBroadcast(intent)
-
-                val penddingIntent = PendingIntent.getBroadcast(this, 0,intent,0)
-
-                val alarmService = this.getSystemService(ALARM_SERVICE) as AlarmManager?
-
-                val currentTime = Calendar.getInstance()
-                if (c.time.time <= currentTime.time.time)
-                    alarmService?.set(AlarmManager.RTC_WAKEUP, currentTime.time.time, penddingIntent)
-                else
-                    alarmService?.set(AlarmManager.RTC_WAKEUP, c.time.time, penddingIntent)
-            }
-
-            val cant = bd.update("medicamentos", registro, "id= '${idRegister}'", null)
-            bd.close()
-
-            if (cant == 1)
-                Toast.makeText(this, "Se modificaron los datos", Toast.LENGTH_SHORT).show()
-            else
-                Toast.makeText(this, "No existe el medicamento", Toast.LENGTH_SHORT).show()
-
-            finish()
-
-            val otherScreen = Intent(this, showMedicine::class.java)
-            otherScreen.putExtra("id", idRegister)
-            startActivity(otherScreen)
-
-        } else {
-
-            val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
-            val bd = admin.writableDatabase
-            val registro = ContentValues()
+        if (date[3] == 0) {
             val c = Calendar.getInstance()
 
-            // sumar la el tiepo a definido a la fecha actual para genrear la fecha de alarma
-            dias.editText?.text.toString().toIntOrNull()?.let { it1 -> c.add(
+            dias.editText?.text.also {
+                if(it.isNullOrEmpty())
+                    dias.editText?.setText("0")
+            }
+            horas.editText?.text.also {
+                if(it.isNullOrEmpty())
+                    horas.editText?.setText("0")
+            }
+            minutos.editText?.text.also {
+                if(it.isNullOrEmpty())
+                    minutos.editText?.setText("0")
+            }
+
+            dias.editText?.text.toString().toIntOrNull()?.let { it1 -> c.set(Calendar.DAY_OF_YEAR,it1) }
+
+            date[0]?.let { it1 -> c.add(Calendar.DAY_OF_YEAR,it1) }
+
+            horas.editText?.text.toString().toIntOrNull()?.let { it1 -> c.set(Calendar.HOUR_OF_DAY,it1) }
+
+            date[1]?.let { it1 -> c.add(Calendar.HOUR_OF_DAY,it1) }
+
+            minutos.editText?.text.toString().toIntOrNull()?.let { it1 -> c.set(Calendar.MINUTE,it1) }
+
+            date[2]?.let { it1 -> c.add(Calendar.MINUTE,it1) }
+            registro.put("fechaConsumo", c.time.time)
+
+        }
+
+        registro.put("tomar", 1)
+
+        val cant = bd.update("medicamentos", registro, "id= '${idRegister}'", null)
+        bd.close()
+
+        if (cant == 1)
+            Toast.makeText(this, "Se modificaron los datos", Toast.LENGTH_SHORT).show()
+        else
+            Toast.makeText(this, "No existe el medicamento", Toast.LENGTH_SHORT).show()
+
+        finish()
+
+        val otherScreen = Intent(this, showMedicine::class.java)
+        otherScreen.putExtra("id", idRegister)
+        startActivity(otherScreen)
+    }
+
+    fun addToDataBase() {
+
+        if (!validedNoEmpty(nombre))
+            return
+
+        val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
+        val bd = admin.writableDatabase
+        val registro = ContentValues()
+        val c = Calendar.getInstance()
+
+        // sumar la el tiepo a definido a la fecha actual para genrear la fecha de alarma
+        dias.editText?.text.toString().toIntOrNull()?.let { it1 -> c.add(
                 Calendar.DAY_OF_YEAR,
                 it1
-            ) }
-            horas.editText?.text.toString().toIntOrNull()?.let { it1 -> c.add(
+        ) }
+        horas.editText?.text.toString().toIntOrNull()?.let { it1 -> c.add(
                 Calendar.HOUR_OF_DAY,
                 it1
-            ) }
-            minutos.editText?.text.toString().toIntOrNull()?.let { it1 -> c.add(
+        ) }
+        minutos.editText?.text.toString().toIntOrNull()?.let { it1 -> c.add(
                 Calendar.MINUTE,
                 it1
-            ) }
+        ) }
 
-            registro.put("nombre", nombre.editText?.text.toString())
-            registro.put("dosis", editText2.getText().toString())
-            registro.put("dias", dias.editText?.text.toString().toIntOrNull())
-            registro.put("horas", horas.editText?.text.toString().toIntOrNull())
-            registro.put("minutos", minutos.editText?.text.toString().toIntOrNull())
-            registro.put("descripcion", editText4.getText().toString())
-            registro.put("tipo", spinner.selectedItem.toString())
-            registro.put("fechaConsumo", c.time.time)
-            registro.put("tomar", 1)
+        registro.put("nombre", nombre.editText?.text.toString())
+        registro.put("dosis", editText2.getText().toString())
+        registro.put("dias", dias.editText?.text.toString().toIntOrNull())
+        registro.put("horas", horas.editText?.text.toString().toIntOrNull())
+        registro.put("minutos", minutos.editText?.text.toString().toIntOrNull())
+        registro.put("descripcion", editText4.getText().toString())
+        registro.put("tipo", spinner.selectedItem.toString())
+        registro.put("fechaConsumo", c.time.time)
+        registro.put("tomar", 1)
 
-            bd.insert("medicamentos", null, registro)
+        bd.insert("medicamentos", null, registro)
 
-            val fila = bd.rawQuery("select * from medicamentos", null)
-            fila.moveToLast()
-            val idMedicine = fila.getInt(0)
+        val fila = bd.rawQuery("select * from medicamentos", null)
+        fila.moveToLast()
+        val idMedicine = fila.getInt(0)
 
-            fila.close()
-            bd.close()
+        fila.close()
+        bd.close()
 
-            Toast.makeText(this, "Se cargaron los datos del medicamento", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Se cargaron los datos del medicamento", Toast.LENGTH_SHORT).show()
 
-            finish()
+        finish()
 
-            val otherScreen = Intent(this, showMedicine::class.java)
-            otherScreen.putExtra("id", idMedicine)
-            startActivity(otherScreen)
-        }
+        val otherScreen = Intent(this, showMedicine::class.java)
+        otherScreen.putExtra("id", idMedicine)
+        startActivity(otherScreen)
     }
+
 }

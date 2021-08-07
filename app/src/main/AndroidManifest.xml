@@ -18,12 +18,6 @@
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".AlarmService"
-            android:enabled="true"
-            android:exported="true"
-            android:stopWithTask="false" />
-
         <activity android:name=".showMedicine" />
         <activity android:name=".to_Register" />
         <activity android:name=".MainActivity">
