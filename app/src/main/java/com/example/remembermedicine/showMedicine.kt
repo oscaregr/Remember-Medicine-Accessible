@@ -37,7 +37,7 @@ class showMedicine : AppCompatActivity() {
         val fila = bd.rawQuery("select * from medicamentos where id='${idRegister}'", null)
         if (fila.moveToFirst()) {
 
-            medicamento.text = fila.getString(1)
+            title_template.text = fila.getString(1)
 
             dosis.text = "Dosis ${fila.getString(2)}"
 

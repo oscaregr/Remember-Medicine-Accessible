@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -15,9 +14,11 @@
             android:id="@+id/encabezado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
+            android:background="@drawable/fondo"
+            android:paddingTop="26dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="12dp"
             >
 
             <TextView
@@ -31,9 +32,9 @@
 
             <TextView
                 android:layout_below="@+id/title"
-                android:layout_marginTop="6dp"
                 android:text="you will never forget to take your medicine again"
                 android:textColor="#FFFFFF"
+                android:layout_marginTop="6dp"
                 android:textStyle="bold"
                 android:textSize="14sp"
                 android:layout_width="wrap_content"
@@ -45,6 +46,9 @@
 
         <GridLayout
             android:layout_marginTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
             android:layout_below="@+id/encabezado"
             android:id="@+id/month_grid"
             android:layout_width="match_parent"
@@ -65,20 +69,30 @@
         </GridLayout>
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <ImageButton
             android:id="@+id/agregar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:backgroundTint="#f69b61"
-            android:padding="20dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/buton_oval"
+            android:clickable="true"
             android:contentDescription="Agregar medicamento"
+            android:maxWidth="64dp"
+            android:maxHeight="64dp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:scaleType="center"
+            android:outlineAmbientShadowColor="@color/black"
+            android:src="@drawable/ic_add_medicine"
             app:elevation="6dp"
-            app:srcCompat="@android:drawable/ic_input_add"
-            />
+            app:fabSize="auto"
+            app:maxImageSize="64dp"
+            app:backgroundTint="@null"/>
 
     </RelativeLayout>
     <!--app:backgroundTint=""

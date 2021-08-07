@@ -46,9 +46,10 @@ class to_Register : AppCompatActivity() {
         }
 
 
-        if (edit == true)
+        if (edit == true) {
             showMedicineInfo(lista, idRegister)
-
+            title_template.text = "Modificar"
+        }
 
         back.setOnClickListener {
             finish()

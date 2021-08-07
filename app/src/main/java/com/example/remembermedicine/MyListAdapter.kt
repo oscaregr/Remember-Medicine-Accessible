@@ -37,7 +37,7 @@ class MyListAdapter(private val context: Activity, private val title: ArrayList<
         imageView.contentDescription = imgid[position]
         subtitleText.text = description[position]
 
-        rowView.contentDescription = "Toca 2 veces para mostrar información"
+        //rowView.contentDescription = "Toca 2 veces para mostrar información"
 
         return rowView
     }
