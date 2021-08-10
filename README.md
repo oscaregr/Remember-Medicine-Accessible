@@ -12,12 +12,13 @@ Notificaciones pendientes programables
 Notificaciones con las alaramas redireccionanado al medicamento al click
 Cancelar notificaciones
 Notificaciones con sonido y vibracion
+Funciona multiples idiomas
 
 !!Pendientes!!
 
-Acomodar los contenDescription y calar la app con TalkBack
-
+Accesible a TalkBack, acomodar adaptable a los idiomas
+Redefinir forma de mostrar imagenes
+Rediseñar cambio de lenguaje (Accesibilidad y encabezados)
 
 !!Extra!! 
-Checar cambio de lenguaje
 Modo noche
