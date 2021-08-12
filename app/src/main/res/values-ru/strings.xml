@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Remember Medicine</string>
+
+    <string name="tablets">Таблетки</string>
+    <string name="capsules">Капсулы</string>
+    <string name="inalator">ингалятор</string>
+    <string name="drops">лекарство в каплях</string>
+    <string name="cream">Крем для пасты</string>
+    <string name="gel">Расходный гель</string>
+    <string name="injection">Инъекция</string>
+    <string name="ampoules">флаконы</string>
+    <string name="nasal">Назальный ингалятор</string>
+
+    <string name="motto">ты никогда не забудешь снова принять лекарство</string>
+    <string name="description_button_add">Добавить лекарство</string>
+    <string name="tittle_register">Зарегистрируйтесь сейчас</string>
+    <string name="input_name">Название лекарства</string>
+    <string name="dose">Доза для употребления</string>
+    <string name="time_span">Период времени для потребления</string>
+    <string name="day">Дни</string>
+    <string name="hour">Часы</string>
+    <string name="minute">Минуты</string>
+    <string name="medicine_type">Тип лекарства</string>
+    <string-array name="items_type_medicine">
+        <item>@string/tablets</item>
+        <item>@string/capsules</item>
+        <item>@string/inalator</item>
+        <item>@string/drops</item>
+        <item>@string/cream</item>
+        <item>@string/gel</item>
+        <item>@string/injection</item>
+        <item>@string/ampoules</item>
+        <item>@string/nasal</item>
+    </string-array>
+    <string name="description">Описание</string>
+    <string name="description_input_description">Описание лекарства, для чего оно?</string>
+    <string name="save">Сохранить</string>
+    <string name="update">Обновить</string>
+    <string name="back">Обратно к списку</string>
+    <string name="delete">Удалить</string>
+    <string name="every">Каждый</string>
+    <string name="token">принять лекарство</string>
+    <string name="preference_file_key" />
+    <string name="lenguage">Изменение языка.</string>
+    <string name="inputError">Поле не может быть пустым.</string>
+    <string name="dataUpdate">Данные были изменены.</string>
+    <string name="dataNoExist">Лекарства нет.</string>
+    <string name="dataSaved">Спасенное средство.</string>
+    <string name="messageEdit">Если вы продолжите, текущий сигнал тревоги будет удален.</string>
+    <string name="go">Продолжать</string>
+    <string name="cancel">Отмена</string>
+    <string name="deleteMessageWithAlarm">Вы уверены, что хотите удалить это лекарство и отложить тревогу?</string>
+    <string name="deleteMessage">Вы уверены, что хотите отменить этот препарат?</string>
+    <string name="deleteMedicine">Лекарство удалено.</string>
+</resources>

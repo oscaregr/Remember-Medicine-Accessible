@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Remember Medicine</string>
+
+    <string name="tablets">Comprimés</string>
+    <string name="capsules">Gélules</string>
+    <string name="inalator">inhalateur</string>
+    <string name="drops">médicament en gouttes</string>
+    <string name="cream">Crème à tartiner</string>
+    <string name="gel">Gel consommable</string>
+    <string name="injection">Injection</string>
+    <string name="ampoules">flacons</string>
+    <string name="nasal">Inhalateur nasal</string>
+
+    <string name="motto">vous n\'oublierez plus jamais de prendre votre médicament</string>
+    <string name="description_button_add">Ajouter un médicament</string>
+    <string name="tittle_register">Enregistrer</string>
+    <string name="input_name">Nom du médicament</string>
+    <string name="dose">Dosage à consommer</string>
+    <string name="time_span">Durée de consommation</string>
+    <string name="day">Journées</string>
+    <string name="hour">Les heures</string>
+    <string name="minute">Minutes</string>
+    <string name="medicine_type">Type de médicament</string>
+    <string-array name="items_type_medicine">
+        <item>@string/tablets</item>
+        <item>@string/capsules</item>
+        <item>@string/inalator</item>
+        <item>@string/drops</item>
+        <item>@string/cream</item>
+        <item>@string/gel</item>
+        <item>@string/injection</item>
+        <item>@string/ampoules</item>
+        <item>@string/nasal</item>
+    </string-array>
+    <string name="description">La description</string>
+    <string name="description_input_description">Description du médicament, à quoi ça sert ?</string>
+    <string name="save">sauver</string>
+    <string name="update">Mettre à jour</string>
+    <string name="back">Retour à la liste</string>
+    <string name="delete">Supprimer</string>
+    <string name="every">Tous</string>
+    <string name="token">Prendre le médicament</string>
+    <string name="preference_file_key" />
+    <string name="lenguage">Changer la langue.</string>
+    <string name="inputError">le champ ne peut pas être vide.</string>
+    <string name="dataUpdate">Les données ont été modifiées.</string>
+    <string name="dataNoExist">Il n\'y a pas de médicament.</string>
+    <string name="dataSaved">Médicament sauvé.</string>
+    <string name="messageEdit">Si vous continuez, l\'alarme actuelle sera effacée.</string>
+    <string name="go">continuer</string>
+    <string name="cancel">Annuler</string>
+    <string name="deleteMessageWithAlarm">Êtes-vous sûr de vouloir supprimer ce médicament et son alarme en attente ?</string>
+    <string name="deleteMessage">Êtes-vous sûr de vouloir éliminer ce médicament ?</string>
+    <string name="deleteMedicine">Médicament retiré.</string>
+</resources>

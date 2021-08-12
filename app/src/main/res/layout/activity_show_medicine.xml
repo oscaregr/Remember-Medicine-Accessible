@@ -15,7 +15,7 @@
         <RelativeLayout
             android:id="@+id/encabezado"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:orientation="horizontal"
             android:background="@drawable/fondo"
             >
@@ -24,7 +24,7 @@
                 android:id="@+id/back"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:contentDescription="Volver a Lista"
+                android:contentDescription="@string/back"
                 android:layout_width="70dp"
                 android:background="@android:color/transparent"
                 android:layout_height="85dp"
@@ -33,14 +33,20 @@
             <TextView
                 android:layout_centerInParent="true"
                 android:id="@+id/title_template"
-                android:layout_marginLeft="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
                 android:text="Medicamento"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
-                android:textSize="28dp"
+                android:textSize="28sp"
+                android:layout_marginRight="90dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="15sp"
+                app:autoSizeMaxTextSize="48sp"
+                app:autoSizeStepGranularity="2sp"
                 />
 
             <ImageView
@@ -79,11 +85,11 @@
                         android:id="@+id/edit"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Editar"
+                        android:text="@string/update"
                         android:background="@drawable/button_design"
                         android:backgroundTint="#d6ce56"
                         android:textColor="@color/black"
-                        app:backgroundTint="#d6ce56"
+                        app:backgroundTint="@null"
                         android:layout_alignParentLeft="true"
                         android:layout_marginRight="25dp"
                         android:drawableLeft="@android:drawable/ic_menu_edit"
@@ -93,11 +99,11 @@
                         android:id="@+id/delete"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="Eliminar"
+                        android:text="@string/delete"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/button_design"
                         android:backgroundTint="@color/design_default_color_error"
-                        app:backgroundTint="@color/design_default_color_error"
+                        app:backgroundTint="@null"
                         android:drawableRight="@android:drawable/ic_menu_delete"
                         android:paddingLeft="10dp"
                         />
@@ -110,6 +116,7 @@
                     android:layout_height="14dp"
                     app:backgroundTint="@null"
                     android:backgroundTint="#dc9061"
+                    android:layout_marginTop="20dp"
                     android:background="?android:attr/listDivider"
                     android:importantForAccessibility="no"/>
 
@@ -117,7 +124,7 @@
                     android:id="@+id/dosis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="dosis"
+                    android:text="@string/dose"
                     android:gravity="right"
                     android:textColor="@color/black"
                     android:textSize="28dp"/>
@@ -135,7 +142,7 @@
                     android:id="@+id/lapso"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cada"
+                    android:text="@string/every"
                     android:gravity="left"
                     android:textColor="@color/black"
                     android:textSize="28dp"/>
@@ -152,7 +159,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Descripcion:"
+                    android:text="@string/description"
                     android:textSize="28dp"
                     />
 
@@ -167,18 +174,22 @@
 
                 <Button
                     android:id="@+id/does"
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="50dp"
                     android:background="@drawable/button_design"
                     android:drawableLeft="@drawable/ic_does"
                     android:enabled="false"
-                    android:padding="20dp"
+                    android:padding="10dp"
+                    android:backgroundTint="#a35d2f"
                     android:shadowColor="#954535"
-                    android:text="Tomado"
+                    android:text="@string/token"
                     android:textColor="#FFFFFF"
-                    android:textSize="28dp"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="15sp"
+                    app:autoSizeMaxTextSize="48sp"
+                    app:autoSizeStepGranularity="2sp"
                     android:textStyle="bold"
                     app:backgroundTint="@null"/>
 

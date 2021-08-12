@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_to__register.*
-import kotlinx.android.synthetic.main.activity_to__register.back
 import java.util.*
 
 
@@ -24,19 +23,18 @@ class to_Register : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_to__register)
 
-        val lista = arrayOf(
-            "Pastillas",
-            "Capsulas",
-            "Inalador",
-            "Gotas",
-            "Crema untable",
-            "Gel consumible",
-            "Inyección",
-            "Ampolletas",
-            "Inalador via nazal"
-        )
-        val adaptador1 = ArrayAdapter<String>(this, R.layout.options_item, lista)
-        spinner.adapter = adaptador1
+        val lista = arrayListOf(R.array.items_type_medicine)
+
+        ArrayAdapter.createFromResource(
+                this,
+                R.array.items_type_medicine,
+                R.layout.options_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(R.layout.options_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
 
         val edit = getIntent().getExtras()?.getBoolean("edit", false)
 
@@ -48,14 +46,14 @@ class to_Register : AppCompatActivity() {
 
         if (edit == true) {
             showMedicineInfo(lista, idRegister)
-            title_template.text = "Modificar"
+            title_template.text = R.string.update.toString()
         }
 
         back.setOnClickListener {
             finish()
             if (edit == true)
                 Intent(this, showMedicine::class.java).also {
-                    it.putExtra("id",idRegister)
+                    it.putExtra("id", idRegister)
                     startActivity(it)
                 }
             else
@@ -76,7 +74,7 @@ class to_Register : AppCompatActivity() {
     fun validedNoEmpty(editTxt: TextInputLayout): Boolean {
 
         if (editTxt.editText?.text.toString().trim().isEmpty()) {
-             editTxt.error= "El campo no puede quedar vacio"
+             editTxt.error= "${resources.getString(R.string.inputError)}"
             return false
         } else {
             editTxt.error = null
@@ -84,7 +82,7 @@ class to_Register : AppCompatActivity() {
         }
     }
 
-    fun showMedicineInfo(lista: Array<String>, idRegister: Int?) {
+    fun showMedicineInfo(lista: MutableList<Int>?, idRegister: Int?) {
         val admin = AdminSQLiteOpenHelper(this, "medicinas", null, 1)
         val bd = admin.writableDatabase
         val fila = bd.rawQuery("select * from medicamentos where id='${idRegister}'", null)
@@ -109,7 +107,7 @@ class to_Register : AppCompatActivity() {
 
         editText4.setText(fila.getString(6))
 
-        spinner.setSelection(lista.indexOf(fila.getString(7).toString()))
+        spinner.setSelection(lista!!.indexOf(fila.getInt(7)))
 
         bd.close()
     }
@@ -129,7 +127,7 @@ class to_Register : AppCompatActivity() {
         registro.put("horas", horas.editText?.text.toString().toIntOrNull())
         registro.put("minutos", minutos.editText?.text.toString().toIntOrNull())
         registro.put("descripcion", editText4.getText().toString())
-        registro.put("tipo", spinner.selectedItem.toString())
+        registro.put("tipo", spinner.selectedItemPosition)
 
         if (date[3] == 0) {
             val c = Calendar.getInstance()
@@ -147,17 +145,17 @@ class to_Register : AppCompatActivity() {
                     minutos.editText?.setText("0")
             }
 
-            dias.editText?.text.toString().toIntOrNull()?.let { it1 -> c.set(Calendar.DAY_OF_YEAR,it1) }
+            dias.editText?.text.toString().toIntOrNull()?.let { it1 -> c.set(Calendar.DAY_OF_YEAR, it1) }
 
-            date[0]?.let { it1 -> c.add(Calendar.DAY_OF_YEAR,it1) }
+            date[0]?.let { it1 -> c.add(Calendar.DAY_OF_YEAR, it1) }
 
-            horas.editText?.text.toString().toIntOrNull()?.let { it1 -> c.set(Calendar.HOUR_OF_DAY,it1) }
+            horas.editText?.text.toString().toIntOrNull()?.let { it1 -> c.set(Calendar.HOUR_OF_DAY, it1) }
 
-            date[1]?.let { it1 -> c.add(Calendar.HOUR_OF_DAY,it1) }
+            date[1]?.let { it1 -> c.add(Calendar.HOUR_OF_DAY, it1) }
 
-            minutos.editText?.text.toString().toIntOrNull()?.let { it1 -> c.set(Calendar.MINUTE,it1) }
+            minutos.editText?.text.toString().toIntOrNull()?.let { it1 -> c.set(Calendar.MINUTE, it1) }
 
-            date[2]?.let { it1 -> c.add(Calendar.MINUTE,it1) }
+            date[2]?.let { it1 -> c.add(Calendar.MINUTE, it1) }
             registro.put("fechaConsumo", c.time.time)
 
         }
@@ -168,9 +166,9 @@ class to_Register : AppCompatActivity() {
         bd.close()
 
         if (cant == 1)
-            Toast.makeText(this, "Se modificaron los datos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "${resources.getString(R.string.dataUpdate)}", Toast.LENGTH_SHORT).show()
         else
-            Toast.makeText(this, "No existe el medicamento", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "${resources.getString(R.string.dataNoExist)}", Toast.LENGTH_SHORT).show()
 
         finish()
 
@@ -209,7 +207,7 @@ class to_Register : AppCompatActivity() {
         registro.put("horas", horas.editText?.text.toString().toIntOrNull())
         registro.put("minutos", minutos.editText?.text.toString().toIntOrNull())
         registro.put("descripcion", editText4.getText().toString())
-        registro.put("tipo", spinner.selectedItem.toString())
+        registro.put("tipo", spinner.selectedItemPosition)
         registro.put("fechaConsumo", c.time.time)
         registro.put("tomar", 1)
 
@@ -222,7 +220,7 @@ class to_Register : AppCompatActivity() {
         fila.close()
         bd.close()
 
-        Toast.makeText(this, "Se cargaron los datos del medicamento", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "${resources.getString(R.string.dataSaved)}", Toast.LENGTH_SHORT).show()
 
         finish()
 

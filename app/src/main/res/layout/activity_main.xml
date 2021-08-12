@@ -15,8 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/fondo"
-            android:paddingTop="26dp"
-            android:paddingRight="20dp"
             android:paddingLeft="20dp"
             android:paddingBottom="12dp"
             >
@@ -25,49 +23,49 @@
                 android:id="@+id/title"
                 android:text="Remember Medicine"
                 android:textColor="#FFFFFF"
-                android:textSize="22sp"
+                android:layout_width="match_parent"
+                android:padding="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="100dp"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="15sp"
+                app:autoSizeMaxTextSize="48sp"
+                app:autoSizeStepGranularity="2sp"
+                />
+
+            <Button
+                android:id="@+id/select_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                />
+                android:text="en"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="6dp"
+                android:textColor="@color/white"
+                android:background="@drawable/button_design"
+                android:fontFamily="monospace"
+                android:textSize="10dp"
+                android:drawableLeft="@drawable/ic_baseline_translate_24"
+                android:layout_alignParentRight="true"
+                app:backgroundTint="@null"/>
 
             <TextView
                 android:layout_below="@+id/title"
-                android:text="you will never forget to take your medicine again"
+                android:text="@string/motto"
                 android:textColor="#FFFFFF"
                 android:layout_marginTop="6dp"
+                android:layout_marginRight="20dp"
                 android:textStyle="bold"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6sp"
+                app:autoSizeMaxTextSize="16sp"
+                app:autoSizeStepGranularity="2sp"
                 />
 
 
         </RelativeLayout>
-
-        <GridLayout
-            android:layout_marginTop="20dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="10dp"
-            android:layout_below="@+id/encabezado"
-            android:id="@+id/month_grid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="1"
-            android:alignmentMode="alignMargins"
-            android:columnOrderPreserved="true"
-            >
-
-            <ListView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-            </ListView>
-
-        </GridLayout>
-
 
         <ImageButton
             android:id="@+id/agregar"
@@ -80,7 +78,7 @@
             android:layout_marginBottom="25dp"
             android:background="@drawable/buton_oval"
             android:clickable="true"
-            android:contentDescription="Agregar medicamento"
+            android:contentDescription="@string/description_button_add"
             android:maxWidth="64dp"
             android:maxHeight="64dp"
             android:minWidth="48dp"
@@ -93,6 +91,31 @@
             app:fabSize="auto"
             app:maxImageSize="64dp"
             app:backgroundTint="@null"/>
+
+        <GridLayout
+            android:layout_marginTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:layout_below="@+id/encabezado"
+            android:id="@+id/month_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="1"
+            android:alignmentMode="alignBounds"
+            android:columnOrderPreserved="true"
+            android:outlineProvider="none"
+            >
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+            </ListView>
+
+        </GridLayout>
 
     </RelativeLayout>
     <!--app:backgroundTint=""

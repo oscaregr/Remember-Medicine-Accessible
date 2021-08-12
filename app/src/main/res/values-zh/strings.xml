@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Remember Medicine</string>
+
+    <string name="tablets">平板电脑</string>
+    <string name="capsules">胶囊</string>
+    <string name="inalator">吸入器</string>
+    <string name="drops">滴药</string>
+    <string name="cream">可涂抹奶油</string>
+    <string name="gel">消耗性凝胶</string>
+    <string name="injection">注射剂</string>
+    <string name="ampoules">小瓶</string>
+    <string name="nasal">经鼻吸入器</string>
+
+    <string name="motto">你永远不会忘记再次服药</string>
+    <string name="description_button_add">加药</string>
+    <string name="tittle_register">注册</string>
+    <string name="input_name">药名</string>
+    <string name="dose">服用剂量</string>
+    <string name="time_span">消费时间跨度</string>
+    <string name="day">天</string>
+    <string name="hour">小时</string>
+    <string name="minute">分钟</string>
+    <string name="medicine_type">药物种类</string>
+    <string-array name="items_type_medicine">
+        <item>@string/tablets</item>
+        <item>@string/capsules</item>
+        <item>@string/inalator</item>
+        <item>@string/drops</item>
+        <item>@string/cream</item>
+        <item>@string/gel</item>
+        <item>@string/injection</item>
+        <item>@string/ampoules</item>
+        <item>@string/nasal</item>
+    </string-array>
+    <string name="description">描述</string>
+    <string name="description_input_description">药物描述，它是做什么用的？</string>
+    <string name="save">节省</string>
+    <string name="update">更新</string>
+    <string name="back">返回目录</string>
+    <string name="delete">删除</string>
+    <string name="every">每一个</string>
+    <string name="token">吃药</string>
+    <string name="preference_file_key" />
+    <string name="cancel">取消</string>
+    <string name="go">继续</string>
+    <string name="lenguage">改变语言。</string>
+    <string name="inputError">该字段不能为空。</string>
+    <string name="dataUpdate">数据被修改。</string>
+    <string name="dataNoExist">没有药。</string>
+    <string name="dataSaved">省了药。</string>
+    <string name="messageEdit">如果继续，当前的警报将被清除。</string>
+    <string name="deleteMessage">您确定要消除这种药物吗？</string>
+    <string name="deleteMessageWithAlarm">您确定要移除此药物及其挂起的警报吗？</string>
+    <string name="deleteMedicine">药取出。</string>
+</resources>

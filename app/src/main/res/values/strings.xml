@@ -1,3 +1,70 @@
 <resources>
+    <!--English-->
     <string name="app_name">Remember Medicine</string>
+    
+    <!--generic info-->
+    <string name="tablets">Tablets</string>
+    <string name="capsules">Capsules</string>
+    <string name="inalator">Inalator</string>
+    <string name="drops">Medicine in drops</string>
+    <string name="cream">Spreadable cream</string>
+    <string name="gel">Consumable gel</string>
+    <string name="injection">Injection</string>
+    <string name="ampoules">Ampoules</string>
+    <string name="nasal">Nasal inhaler</string>
+
+    <!-- Main activity-->
+    <string name="description_button_add">Add medicine</string>
+    <string name="lenguage">Change language</string>
+
+    <!--To_Register activity-->
+    <string name="tittle_register">To register</string>
+    <string name="input_name">Medicine name</string>
+    <string name="dose">Dose to consume</string>
+    <string name="time_span">Time span for consumption</string>
+    <string name="day">Days</string>
+    <string name="hour">Hours</string>
+    <string name="minute">Minutes</string>
+    <string name="medicine_type">Type of medicine</string>
+
+    <string-array name="items_type_medicine">
+        <item>@string/tablets</item>
+        <item>@string/capsules</item>
+        <item>@string/inalator</item>
+        <item>@string/drops</item>
+        <item>@string/cream</item>
+        <item>@string/gel</item>
+        <item>@string/injection</item>
+        <item>@string/ampoules</item>
+        <item>@string/nasal</item>
+    </string-array>
+
+    <string name="description">Description</string>
+    <string name="description_input_description">Description of the medicine, what is it for?</string>
+    <string name="save">Save</string>
+    <string name="update">To update</string>
+
+    <!--messaje toast on to register-->
+    <string name="inputError">The field cannot be empty.</string>
+    <string name="dataUpdate">The data was modified.</string>
+    <string name="dataNoExist">There is no medicine.</string>
+    <string name="dataSaved">Saved medicine</string>
+
+    <!--Show_medicine activity-->
+
+    <string name="back">Back to list</string>
+    <string name="delete">Delete</string>
+    <string name="every">Every</string>
+    <string name="token">Took the medicine</string>
+    <string name="motto">you will never forget to take your medicine again</string>
+    <string name="preference_file_key" />
+
+    <!--Alerts text on show medicine-->
+    <string name="messageEdit">If you continue, the current Alarm will be cleared.</string>
+    <string name="go">Continue</string>
+    <string name="cancel">Cancel</string>
+    <string name="deleteMessageWithAlarm">Are you sure you want to remove this drug and its pending Alarm ?</string>
+    <string name="deleteMessage">Are you sure you want to eliminate this medicine?</string>
+    <string name="deleteMedicine">Medicine removed.</string>
+
 </resources>

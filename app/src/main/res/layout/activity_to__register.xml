@@ -15,7 +15,7 @@
         <RelativeLayout
             android:id="@+id/encabezado"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:background="@drawable/fondo"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
@@ -25,7 +25,7 @@
                 android:id="@+id/back"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:contentDescription="Volver"
+                android:contentDescription="@string/back"
                 android:layout_width="70dp"
                 android:background="@android:color/transparent"
                 android:layout_height="85dp"
@@ -34,14 +34,19 @@
             <TextView
                 android:id="@+id/title_template"
                 android:layout_marginTop="10dp"
-                android:text="Registro"
+                android:text="@string/tittle_register"
                 android:textColor="#FFFFFF"
                 android:padding="0dp"
+                android:gravity="right|center_vertical"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:textSize="48sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="15sp"
+                app:autoSizeMaxTextSize="48sp"
+                app:autoSizeStepGranularity="2sp"
                 />
 
         </RelativeLayout>
@@ -74,7 +79,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nombre del medicamento"
+                        android:hint="@string/input_name"
                         android:inputType="text"
                         android:textSize="28dp"
                         android:background="#FFFFFF"
@@ -98,7 +103,7 @@
                         android:id="@+id/editText2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Dosis a cosumir"
+                        android:hint="@string/dose"
                         android:inputType="text"
                         android:textSize="28dp"
                         android:background="#FFFFFF"
@@ -113,7 +118,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Lapso de tiempo para consumo"
+                    android:text="@string/time_span"
                     android:layout_marginRight="10dp"
                     android:textColor="@color/black"
                     android:textSize="28dp"
@@ -137,8 +142,9 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:minWidth="100dp"
                             android:layout_height="wrap_content"
-                            android:hint="Dias"
+                            android:hint="@string/day"
                             android:inputType="number"
                             android:background="#FFFFFF"
                             android:padding="15dp"
@@ -159,8 +165,9 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:minWidth="100dp"
                             android:layout_height="wrap_content"
-                            android:hint="Hrs"
+                            android:hint="@string/hour"
                             android:inputType="number"
                             android:background="#FFFFFF"
                             android:padding="15dp"
@@ -181,8 +188,9 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:minWidth="100dp"
                             android:layout_height="wrap_content"
-                            android:hint="Min"
+                            android:hint="@string/minute"
                             android:inputType="number"
                             android:background="#FFFFFF"
                             android:padding="15dp"
@@ -204,7 +212,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Tipo de medicamento"
+                    android:text="@string/medicine_type"
                     android:layout_marginRight="10dp"
                     android:textColor="@color/black"
                     android:textSize="28dp"/>
@@ -275,13 +283,13 @@
                         android:id="@+id/editText4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Descripcion"
+                        android:hint="@string/description"
                         android:inputType="textMultiLine"
                         android:textSize="28dp"
                         android:background="#FFFFFF"
                         android:padding="15dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:contentDescription="Descripcion del medicamento, ¿Para que es?"
+                        android:contentDescription="@string/description_input_description"
                         android:drawableRight="@drawable/ic_enfermedad" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -298,7 +306,7 @@
                     android:outlineSpotShadowColor="@color/black"
                     android:padding="12dp"
                     android:shadowColor="#954535"
-                    android:text="Guardar"
+                    android:text="@string/save"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"

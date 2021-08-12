@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Remember Medicine</string>
+
+    <string name="tablets">Comprimidos</string>
+    <string name="capsules">Cápsulas</string>
+    <string name="inalator">Inaladorr</string>
+    <string name="drops">remédio em gotas</string>
+    <string name="cream">Creme para barrar</string>
+    <string name="gel">Gel consumível</string>
+    <string name="injection">Injeção</string>
+    <string name="ampoules">frascos</string>
+    <string name="nasal">Inalador nasal</string>
+
+    <string name="motto">você nunca vai esquecer de tomar seu remédio de novo</string>
+    <string name="description_button_add">Adicionar medicamento</string>
+    <string name="tittle_register">Registrar</string>
+    <string name="input_name">Nome do medicamento</string>
+    <string name="dose">Dose para consumir</string>
+    <string name="time_span">Período de tempo para consumo</string>
+    <string name="day">Dias</string>
+    <string name="hour">Horas</string>
+    <string name="minute">Minutos</string>
+    <string name="medicine_type">Tipo de medicamento</string>
+    <string-array name="items_type_medicine">
+        <item>@string/tablets</item>
+        <item>@string/capsules</item>
+        <item>@string/inalator</item>
+        <item>@string/drops</item>
+        <item>@string/cream</item>
+        <item>@string/gel</item>
+        <item>@string/injection</item>
+        <item>@string/ampoules</item>
+        <item>@string/nasal</item>
+    </string-array>
+    <string name="description">Descrição</string>
+    <string name="description_input_description">Descrição do medicamento, para que serve?</string>
+    <string name="save">Salvar</string>
+    <string name="update">Atualizar</string>
+    <string name="back">De volta à lista</string>
+    <string name="delete">Excluir</string>
+    <string name="every">Cada</string>
+    <string name="token">Tome o medicamento</string>
+    <string name="preference_file_key" />
+    <string name="lenguage">Mudar idioma.</string>
+    <string name="inputError">o campo não pode estar vazio.</string>
+    <string name="dataUpdate">Os dados foram modificados.</string>
+    <string name="dataNoExist">Não há remédio.</string>
+    <string name="dataSaved">Remédio salvo.</string>
+    <string name="messageEdit">Se você continuar, o alarme atual será cancelado.</string>
+    <string name="go">Continuar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="deleteMessageWithAlarm">Tem certeza de que deseja remover este medicamento e seu alarme pendente?</string>
+    <string name="deleteMessage">Tem certeza de que deseja eliminar esta droga?</string>
+    <string name="deleteMedicine">Remédio removido.</string>
+</resources>

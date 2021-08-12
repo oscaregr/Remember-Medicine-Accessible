@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Remember Medicine</string>
+
+    <string name="tablets">タブレット</string>
+    <string name="capsules">カプセル</string>
+    <string name="inalator">吸入器</string>
+    <string name="drops">滴の薬</string>
+    <string name="cream">スプレッドクリーム</string>
+    <string name="gel">消耗品ジェル</string>
+    <string name="injection">注入</string>
+    <string name="ampoules">バイアル</string>
+    <string name="nasal">鼻吸入器</string>
+
+    <string name="motto">あなたは再びあなたの薬を飲むことを決して忘れません</string>
+    <string name="description_button_add">薬を追加する</string>
+    <string name="tittle_register">登録するために</string>
+    <string name="input_name">薬名</string>
+    <string name="dose">消費する用量</string>
+    <string name="time_span">消費期間</string>
+    <string name="day">日々</string>
+    <string name="hour">時間</string>
+    <string name="minute">分</string>
+    <string name="medicine_type">薬の種類</string>
+    <string-array name="items_type_medicine">
+        <item>@string/tablets</item>
+        <item>@string/capsules</item>
+        <item>@string/inalator</item>
+        <item>@string/drops</item>
+        <item>@string/cream</item>
+        <item>@string/gel</item>
+        <item>@string/injection</item>
+        <item>@string/ampoules</item>
+        <item>@string/nasal</item>
+    </string-array>
+    <string name="description">説明</string>
+    <string name="description_input_description">薬の説明、それは何のためですか？</string>
+    <string name="save">保存する</string>
+    <string name="update">更新するには</string>
+    <string name="back">リストに戻る</string>
+    <string name="delete">消去</string>
+    <string name="every">毎日</string>
+    <string name="token">薬を飲む</string>
+    <string name="preference_file_key" />
+    <string name="lenguage">言語を変更。</string>
+    <string name="inputError">フィールドを空にすることはできません。</string>
+    <string name="dataUpdate">データが変更されました。</string>
+    <string name="dataNoExist">薬はありません。</string>
+    <string name="dataSaved">保存された薬。</string>
+    <string name="messageEdit">続行すると、現在のアラームがクリアされます。</string>
+    <string name="go">継続する</string>
+    <string name="cancel">キャンセル</string>
+    <string name="deleteMessageWithAlarm">この薬とその保留中のアラームを削除してもよろしいですか？</string>
+    <string name="deleteMessage">この薬を排除してもよろしいですか？</string>
+    <string name="deleteMedicine">薬が削除されました。</string>
+</resources>

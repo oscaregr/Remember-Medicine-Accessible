@@ -18,9 +18,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".showMedicine" />
-        <activity android:name=".to_Register" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".showMedicine" android:configChanges="locale"/>
+        <activity android:name=".to_Register" android:configChanges="locale"/>
+        <activity android:name=".MainActivity" android:configChanges="locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

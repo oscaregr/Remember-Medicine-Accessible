@@ -39,33 +39,58 @@ class showMedicine : AppCompatActivity() {
 
             title_template.text = fila.getString(1)
 
-            dosis.text = "Dosis ${fila.getString(2)}"
+            dosis.text = "${dosis.text}, ${fila.getString(2)}"
 
-            lapso.text = "Cada "
+            lapso.text = "${lapso.text}"
 
             if (fila.getInt(3) != 0)
-                lapso.text =  "${lapso.text} ${fila.getInt(3)} dias"
+                lapso.text =  "${lapso.text}, ${fila.getInt(3)} ${resources.getString(R.string.day)}"
             else if (fila.getInt(4) != 0)
-                lapso.text = "${lapso.text} ${fila.getInt(4)} horas"
+                lapso.text = "${lapso.text}, ${fila.getInt(4)} ${resources.getString(R.string.hour)}"
             else if (fila.getInt(5) != 0)
-                lapso.text = "${lapso.text} ${fila.getInt(5)} minutos"
+                lapso.text = "${lapso.text}, ${fila.getInt(5)} ${resources.getString(R.string.minute)}"
 
             descripcion.text = fila.getString(6)
 
-            when (fila.getString(7))
+            when (fila.getInt(7))
             {
-                "Pastillas" -> tipo.setImageResource(R.drawable.pills_free)
-                "Capsulas" -> tipo.setImageResource(R.drawable.capsulas)
-                "Inalador" -> tipo.setImageResource(R.drawable.inalador_free)
-                "Gotas" -> tipo.setImageResource(R.drawable.gotas)
-                "Crema untable" -> tipo.setImageResource(R.drawable.gel_untable)
-                "Gel consumible" -> tipo.setImageResource(R.drawable.gel_consumible)
-                "Inyección" -> tipo.setImageResource(R.drawable.injeccion)
-                "Ampolletas" -> tipo.setImageResource(R.drawable.ampolleta)
-                "Inalador via nazal" -> tipo.setImageResource(R.drawable.inalador_nazal)
+                0 -> {
+                    tipo.setImageResource(R.drawable.pills_free)
+                    tipo.contentDescription = "${resources.getString(R.string.tablets)}"
+                }
+                1 -> {
+                    tipo.setImageResource(R.drawable.capsulas)
+                    tipo.contentDescription = "${resources.getString(R.string.capsules)}"
+                }
+                2 -> {
+                    tipo.setImageResource(R.drawable.inalador_free)
+                    tipo.contentDescription = "${resources.getString(R.string.inalator)}"
+                }
+                3 -> {
+                    tipo.setImageResource(R.drawable.gotas)
+                    tipo.contentDescription = "${resources.getString(R.string.drops)}"
+                }
+                4 -> {
+                    tipo.setImageResource(R.drawable.gel_untable)
+                    tipo.contentDescription = "${resources.getString(R.string.cream)}"
+                }
+                5 -> {
+                    tipo.setImageResource(R.drawable.gel_consumible)
+                    tipo.contentDescription = "${resources.getString(R.string.gel)}"
+                }
+                6 -> {
+                    tipo.setImageResource(R.drawable.injeccion)
+                    tipo.contentDescription = "${resources.getString(R.string.injection)}"
+                }
+                7 -> {
+                    tipo.setImageResource(R.drawable.ampolleta)
+                    tipo.contentDescription = "${resources.getString(R.string.ampoules)}"
+                }
+                8 -> {
+                    tipo.setImageResource(R.drawable.inalador_nazal)
+                    tipo.contentDescription = "${resources.getString(R.string.nasal)}"
+                }
             }
-
-            tipo.contentDescription = fila.getString(7)
 
             tomar = fila.getInt(9)
 
@@ -84,11 +109,11 @@ class showMedicine : AppCompatActivity() {
 
             if (tomar == 0){
                 val builder1: AlertDialog.Builder = AlertDialog.Builder(this)
-                builder1.setMessage("Si continuas, la Alarma actual sera eliminada")
+                builder1.setMessage("${resources.getString(R.string.messageEdit)}")
                 builder1.setCancelable(true)
 
                 builder1.setPositiveButton(
-                        "Continuar",
+                        "${resources.getString(R.string.go)}",
                         { dialog, id ->
                             deleteNotification()
                             dialog.cancel()
@@ -97,7 +122,7 @@ class showMedicine : AppCompatActivity() {
                 )
 
                 builder1.setNegativeButton(
-                        "Cancelar",
+                        "${resources.getString(R.string.cancel)}",
                         { dialog, id -> dialog.cancel() })
 
                 val alert11: AlertDialog = builder1.create()
@@ -110,14 +135,14 @@ class showMedicine : AppCompatActivity() {
         delete.setOnClickListener {
             val builder1: AlertDialog.Builder = AlertDialog.Builder(this)
             if (tomar == 0)
-                builder1.setMessage("Seguro que desea elmiminar este medicamento y su Alarma pendiente" )
+                builder1.setMessage("${resources.getString(R.string.deleteMessageWithAlarm)}" )
             else
-                builder1.setMessage("Seguro que desea elmiminar este medicamento" )
+                builder1.setMessage("${resources.getString(R.string.deleteMessage)}" )
 
             builder1.setCancelable(true)
 
             builder1.setPositiveButton(
-                    "Continuar",
+                    "${resources.getString(R.string.go)}",
                     { dialog, id ->
                         deleteNotification()
                         deleteMedicine()
@@ -126,7 +151,7 @@ class showMedicine : AppCompatActivity() {
             )
 
             builder1.setNegativeButton(
-                    "Cancelar",
+                    "${resources.getString(R.string.cancel)}",
                     { dialog, id -> dialog.cancel() })
 
             val alert11: AlertDialog = builder1.create()
@@ -199,7 +224,7 @@ class showMedicine : AppCompatActivity() {
         bd.close()
 
         if (cant == 1)
-            Toast.makeText(this, "Se borró el Medicamento", Toast.LENGTH_SHORT)
+            Toast.makeText(this, "${resources.getString(R.string.deleteMedicine)}", Toast.LENGTH_SHORT)
                     .show()
 
         finish()
