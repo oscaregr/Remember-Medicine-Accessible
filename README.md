@@ -13,12 +13,11 @@ Notificaciones con las alaramas redireccionanado al medicamento al click
 Cancelar notificaciones
 Notificaciones con sonido y vibracion
 Funciona multiples idiomas
+Responsive
 
 !!Pendientes!!
 
-Accesible a TalkBack, acomodar adaptable a los idiomas
-Redefinir forma de mostrar imagenes
-Rediseñar cambio de lenguaje (Accesibilidad y encabezados)
+Schange icon
 
 !!Extra!! 
 Modo noche
